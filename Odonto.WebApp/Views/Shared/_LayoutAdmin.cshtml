@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -103,14 +105,11 @@
 					<!-- End Messages -->
 					<!-- Profile -->
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/users/5.jpg" alt="user" class="profile-pic" /></a>
+						<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> @HttpContextAccessor.HttpContext.Session.GetString("userName")</a>
 						<div class="dropdown-menu dropdown-menu-right animated zoomIn">
 							<ul class="dropdown-user">
-								<li><a href="#"><i class="ti-user"></i> Profile</a></li>
-								<li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-								<li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-								<li><a href="#"><i class="ti-settings"></i> Setting</a></li>
-								<li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+								@*<li><a href="/"><i class="ti-user"></i> Perfil</a></li>*@	
+								<li><a asp-action="Logout" asp-controller="Login"><i class="fa fa-power-off"></i> Sair</a></li>
 							</ul>
 						</div>
 					</li>

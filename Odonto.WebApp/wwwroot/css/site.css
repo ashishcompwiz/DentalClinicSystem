@@ -25,6 +25,7 @@
 
 /* CUSTOM */
 
+/* Cards */
 .card-with-error .card-header {
 	background: #ef5350 none repeat scroll 0 0;
 	border-color: #ef5350;
@@ -33,14 +34,47 @@
     text-align: center;
 }
 
-span.form-control-feedback {
-	font-size: 85%;
-}
-
 .show-record div div h5:first-child {
 	margin: 0;
 }
+
 .show-record div div h5:last-child {
 	margin-top: 10px;
 	margin-bottom: 25px;
 }
+
+/* Forms */
+span.form-control-feedback {
+	font-size: 85%;
+}
+
+/* General */
+.text-primary {
+	color: #004488 !important;
+}
+
+tbody tr td {
+	color: #585858;
+}
+
+tbody tr td a {
+	font-weight: bold;
+}
+
+a, button {
+	color: #585858;
+}
+
+.btn-success {
+	background: #23d279;
+	border: 1px solid #23d279;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(35, 210, 121, 0.14), 0 3px 1px -2px rgba(35, 210, 121, 0.2), 0 1px 5px 0 rgba(35, 210, 121, 0.12);
+	box-shadow: 0 2px 2px 0 rgba(35, 210, 121, 0.14), 0 3px 1px -2px rgba(35, 210, 121, 0.2), 0 1px 5px 0 rgba(35, 210, 121, 0.12);
+}
+
+	.btn-success:hover {
+		background: #2efb92;
+		-webkit-box-shadow: 0 14px 26px -12px rgba(46, 251, 146, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(46, 251, 146, 0.2);
+		box-shadow: 0 14px 26px -12px rgba(46, 251, 146, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(46, 251, 146, 0.2);
+		border: 1px solid #2efb92;
+	}

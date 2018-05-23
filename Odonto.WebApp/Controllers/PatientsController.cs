@@ -25,7 +25,7 @@ namespace Odonto.WebApp.Controllers
         public IActionResult Add()
         {
             ViewData["Section"] = "Pacientes";
-            ViewData["Action"] = "Adicionar Novo";
+            ViewData["Action"] = "Criar Novo";
 
             var Model = new Patient();
 
@@ -44,18 +44,18 @@ namespace Odonto.WebApp.Controllers
 
             Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
             Model.CreatedBy = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
-            int patientId = PatientsDAO.Add(Model);
+            int id = PatientsDAO.Add(Model);
 
-            return RedirectToAction("Record", new { patientId });
+            return RedirectToAction("Record", new { id });
         }
 
         [HttpGet]
-        public IActionResult Edit(int patientId)
+        public IActionResult Edit(int id)
         {
             ViewData["Section"] = "Pacientes";
             ViewData["Action"] = "Editar";
 
-            var Model = PatientsDAO.GetById(patientId);
+            var Model = PatientsDAO.GetById(id);
 
             return View("Add", Model);
         }
@@ -74,15 +74,15 @@ namespace Odonto.WebApp.Controllers
             Model.UpdatedBy = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
             PatientsDAO.Edit(Model);
 
-            return RedirectToAction("Record", new { patientId = Model.ID});
+            return RedirectToAction("Record", new { id = Model.ID});
         }
         [HttpGet]
-        public IActionResult Record(int patientId)
+        public IActionResult Record(int id)
         {
             ViewData["Section"] = "Pacientes";
             ViewData["Action"] = "Prontuário Odontológico";
 
-            var patient = PatientsDAO.GetById(patientId);
+            var patient = PatientsDAO.GetById(id);
 
             return View(patient);
         }
@@ -92,8 +92,7 @@ namespace Odonto.WebApp.Controllers
             ViewData["Section"] = "Pacientes";
             ViewData["Action"] = "Listar";
 
-            //int clinicId = Convert.ToInt32(HttpContext.Session.GetString("clinicId"));
-            var patientList = PatientsDAO.GetAll(3);
+            var patientList = PatientsDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
 
             return View(patientList);
         }

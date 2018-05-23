@@ -16,7 +16,7 @@
 							<th>Nome</th>
 							<th class="hidden-sm-down">Sexo</th>
 							<th class="hidden-sm-down">Telefone</th>
-							<th></th>
+							<th class="text-center"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -24,10 +24,13 @@
 						{
 							<tr>
 								<td>@item.CPF</td>
-								<td><a href="@Url.Action("Record", "Patients", new { patientId = item.ID })">@item.Name @item.LastName</a></td>
+								<td><a title="Clique para ver o prontuário" href="@Url.Action("Record", "Patients", new { patientId = item.ID })">@item.Name @item.LastName</a></td>
 								<td class="hidden-sm-down">@item.SexString</td>
 								<td class="hidden-sm-down">@item.Phone</td>
-								<td></td>
+								<td class="text-center">
+									<a title="Editar" class="text-warning" asp-action="Edit" asp-controller="Patients" asp-route-id="@item.ID"><i class="fa fa-pencil fa-lg"></i></a>&nbsp;
+									<a title="Remover" class="text-danger" asp-action="Remove" asp-controller="Patients" asp-route-id="@item.ID"><i class="fa fa-trash fa-lg"></i></a>
+								</td>
 							</tr>
 						}
 					</tbody>

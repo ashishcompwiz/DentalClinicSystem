@@ -107,7 +107,7 @@ a.link {
 }
 a.link:focus,
 a.link:hover {
-  color: #1976d2;
+  color: #004488;
 }
 .img-responsive,
 .carousel.vertical .carousel-inner > .item > img,
@@ -274,7 +274,7 @@ h6 {
   color: #26dad2 !important;
 }
 .text-info {
-  color: #1976d2 !important;
+  color: #004488 !important;
 }
 .text-inverse {
   color: #2f3d4a !important;
@@ -295,7 +295,7 @@ h6 {
   color: #67757c;
 }
 .text-themecolor {
-  color: #1976d2;
+  color: #004488;
 }
 .bg-primary {
   background-color: #5c4ac7 !important;
@@ -304,7 +304,7 @@ h6 {
   background-color: #26dad2 !important;
 }
 .bg-info {
-  background-color: #1976d2 !important;
+  background-color: #004488 !important;
 }
 .bg-warning {
   background-color: #ffb22b !important;
@@ -316,7 +316,7 @@ h6 {
   background-color: #00897b;
 }
 .bg-theme {
-  background-color: #1976d2;
+  background-color: #004488;
 }
 .bg-inverse {
   background-color: #2f3d4a;
@@ -1186,7 +1186,7 @@ h6.h1 {
 }
 .header ul.dropdown-user li a:hover {
   background: #f2f4f8;
-  color: #1976d2;
+  color: #004488;
   text-decoration: none;
 }
 .header ul.dropdown-user li.divider {
@@ -1333,7 +1333,7 @@ ul.list-style-none li a {
   text-decoration: none;
 }
 ul.list-style-none li a:hover {
-  color: #1976d2;
+  color: #004488;
 }
 .dropdown-item {
   padding: 8px 1rem;
@@ -1579,17 +1579,17 @@ textarea {
   white-space: nowrap;
 }
 .sidebar-nav ul li a:hover {
-  color: #1976d2;
+  color: #004488;
 }
 .sidebar-nav ul li a:hover i {
-  color: #1976d2;
+  color: #004488;
 }
 .sidebar-nav ul li a.active {
-  color: #1976d2;
+  color: #004488;
   font-weight: 500;
 }
 .sidebar-nav ul li a.active i {
-  color: #1976d2;
+  color: #004488;
 }
 .sidebar-nav ul li ul {
   padding-left: 28px;
@@ -1634,15 +1634,15 @@ textarea {
 .sidebar-nav > ul > li > a.active {
   font-weight: 400;
   background: #fff;
-  color: #1976d2;
+  color: #004488;
 }
 .sidebar-nav > ul > li.active > a {
-  color: #1976d2;
+  color: #004488;
   font-weight: 500;
   border-left: 3px solid #fff;
 }
 .sidebar-nav > ul > li.active > a i {
-  color: #1976d2;
+  color: #004488;
 }
 .sidebar-nav .has-arrow {
   position: relative;
@@ -1825,7 +1825,7 @@ textarea {
   background-color: #26dad2;
 }
 .badge-info {
-  background-color: #1976d2;
+  background-color: #004488;
 }
 .badge-primary {
   background-color: #5c4ac7;
@@ -1863,7 +1863,7 @@ textarea {
   background-color: #26dad2;
 }
 .label-info {
-  background-color: #1976d2;
+  background-color: #004488;
 }
 .label-warning {
   background-color: #ffb22b;
@@ -1898,7 +1898,7 @@ textarea {
 }
 .label-light-info {
   background-color: #cfecfe;
-  color: #1976d2;
+  color: #004488;
 }
 .label-light-warning {
   background-color: #fff8ec;
@@ -1989,28 +1989,28 @@ textarea {
   background-color: #f2f4f8;
 }
 .pagination > .active > a {
-  background-color: #1976d2;
-  border-color: #1976d2;
+  background-color: #004488;
+  border-color: #004488;
 }
 .pagination > .active > a:focus {
-  background-color: #1976d2;
-  border-color: #1976d2;
+  background-color: #004488;
+  border-color: #004488;
 }
 .pagination > .active > a:hover {
-  background-color: #1976d2;
-  border-color: #1976d2;
+  background-color: #004488;
+  border-color: #004488;
 }
 .pagination > .active > span {
-  background-color: #1976d2;
-  border-color: #1976d2;
+  background-color: #004488;
+  border-color: #004488;
 }
 .pagination > .active > span:focus {
-  background-color: #1976d2;
-  border-color: #1976d2;
+  background-color: #004488;
+  border-color: #004488;
 }
 .pagination > .active > span:hover {
-  background-color: #1976d2;
-  border-color: #1976d2;
+  background-color: #004488;
+  border-color: #004488;
 }
 .pagination-split li {
   margin-left: 5px;
@@ -2184,8 +2184,8 @@ textarea {
   border-color: #ffb22b;
 }
 .card-info {
-  background: #1976d2 none repeat scroll 0 0;
-  border-color: #1976d2;
+  background: #004488 none repeat scroll 0 0;
+  border-color: #004488;
 }
 .card-primary {
   background: #5c4ac7 none repeat scroll 0 0;
@@ -2219,11 +2219,11 @@ textarea {
   transition: height 0.08s ease 0s;
 }
 .card-outline-info {
-  border-color: #1976d2;
+  border-color: #004488;
 }
 .card-outline-info .card-header {
-  background: #1976d2 none repeat scroll 0 0;
-  border-color: #1976d2;
+  background: #004488 none repeat scroll 0 0;
+  border-color: #004488;
 }
 .card-outline-inverse {
   border-color: #2f3d4a;
@@ -2314,7 +2314,7 @@ textarea {
 .tabs-vertical li .nav-link.active,
 .tabs-vertical li .nav-link.active:focus,
 .tabs-vertical li .nav-link:hover {
-  background: #1976d2 none repeat scroll 0 0;
+  background: #004488 none repeat scroll 0 0;
   border: 0 none;
   color: #ffffff;
 }
@@ -2326,11 +2326,11 @@ textarea {
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
   background: #ffffff none repeat scroll 0 0;
-  border-color: currentcolor #1976d2 currentcolor currentcolor;
+  border-color: currentcolor #004488 currentcolor currentcolor;
   border-image: none;
   border-style: none solid none none;
   border-width: 0 2px 0 0;
-  color: #1976d2;
+  color: #004488;
   margin-right: -1px;
 }
 .tabcontent-border {
@@ -2349,11 +2349,11 @@ textarea {
   margin-right: 3px;
 }
 .customtab2 li a.nav-link.active {
-  background: #1976d2 none repeat scroll 0 0;
+  background: #004488 none repeat scroll 0 0;
   color: #ffffff;
 }
 .customtab2 li a.nav-link:hover {
-  background: #1976d2 none repeat scroll 0 0;
+  background: #004488 none repeat scroll 0 0;
   color: #ffffff;
 }
 .modal-dialog {
@@ -2477,7 +2477,7 @@ textarea {
   padding-top: 5px;
 }
 .dt-buttons .dt-button {
-  background: #1976d2 none repeat scroll 0 0;
+  background: #004488 none repeat scroll 0 0;
   border-radius: 4px;
   color: #ffffff;
   margin-right: 3px;
@@ -2495,7 +2495,7 @@ textarea {
 }
 .dataTables_length select {
   background-color: transparent;
-  background-image: linear-gradient(#1976d2, #1976d2), linear-gradient(#b1b8bb, #b1b8bb);
+  background-image: linear-gradient(#004488, #004488), linear-gradient(#b1b8bb, #b1b8bb);
   background-position: center bottom, center calc(99%);
   background-repeat: no-repeat;
   background-size: 0 2px, 100% 1px;
@@ -2504,7 +2504,7 @@ textarea {
   transition: background 0s ease-out 0s;
 }
 .dataTables_length select:focus {
-  background-image: linear-gradient(#1976d2, #1976d2), linear-gradient(#b1b8bb, #b1b8bb);
+  background-image: linear-gradient(#004488, #004488), linear-gradient(#b1b8bb, #b1b8bb);
   background-size: 100% 2px, 100% 1px;
   box-shadow: none;
   outline: medium none;
@@ -2516,7 +2516,7 @@ textarea {
 }
 .dataTables_filter input {
   background-color: transparent;
-  background-image: linear-gradient(#1976d2, #1976d2), linear-gradient(#b1b8bb, #b1b8bb);
+  background-image: linear-gradient(#004488, #004488), linear-gradient(#b1b8bb, #b1b8bb);
   background-position: center bottom, center calc(99%);
   background-repeat: no-repeat;
   background-size: 0 2px, 100% 1px;
@@ -2528,7 +2528,7 @@ textarea {
   transition: background 0s ease-out 0s;
 }
 .dataTables_filter input:focus {
-  background-image: linear-gradient(#1976d2, #1976d2), linear-gradient(#b1b8bb, #b1b8bb);
+  background-image: linear-gradient(#004488, #004488), linear-gradient(#b1b8bb, #b1b8bb);
   background-size: 100% 2px, 100% 1px;
   box-shadow: none;
   outline: medium none;
@@ -2578,8 +2578,8 @@ table.dataTable thead .sorting::after {
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-  background-color: #1976d2;
-  border: 1px solid #1976d2;
+  background-color: #004488;
+  border: 1px solid #004488;
   color: #ffffff !important;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
@@ -2592,8 +2592,8 @@ table.dataTable thead .sorting::after {
   cursor: default;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-  background-color: #1976d2;
-  border: 1px solid #1976d2;
+  background-color: #004488;
+  border: 1px solid #004488;
   color: white;
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button:active {
@@ -2622,7 +2622,7 @@ table.dataTable thead .sorting::after {
 }
 .paging_simple_numbers .pagination .paginate_button.active a,
 .paging_simple_numbers .pagination .paginate_button:hover a {
-  background: #1976d2 none repeat scroll 0 0;
+  background: #004488 none repeat scroll 0 0;
   color: #ffffff;
 }
 .panel {
@@ -2911,14 +2911,14 @@ table.dataTable thead .sorting::after {
   box-shadow: 0 14px 26px -12px rgba(116, 96, 238, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(116, 96, 238, 0.2);
 }
 .btn-themecolor {
-  background: #1976d2;
+  background: #004488;
   color: #ffffff;
-  border: 1px solid #1976d2;
+  border: 1px solid #004488;
 }
 .btn-themecolor:hover {
-  background: #1976d2;
+  background: #004488;
   opacity: 0.7;
-  border: 1px solid #1976d2;
+  border: 1px solid #004488;
 }
 .btn-themecolor:active {
   background: #028ee1;
@@ -2927,14 +2927,14 @@ table.dataTable thead .sorting::after {
   background: #028ee1;
 }
 .btn-themecolor.disabled {
-  background: #1976d2;
+  background: #004488;
   color: #ffffff;
-  border: 1px solid #1976d2;
+  border: 1px solid #004488;
 }
 .btn-themecolor.disabled:hover {
-  background: #1976d2;
+  background: #004488;
   opacity: 0.7;
-  border: 1px solid #1976d2;
+  border: 1px solid #004488;
 }
 .btn-themecolor.disabled:active {
   background: #028ee1;
@@ -3027,8 +3027,8 @@ table.dataTable thead .sorting::after {
   box-shadow: 0 14px 26px -12px rgba(40, 190, 189, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(40, 190, 189, 0.2);
 }
 .btn-info {
-  background: #1976d2;
-  border: 1px solid #1976d2;
+  background: #004488;
+  border: 1px solid #004488;
   -webkit-box-shadow: 0 2px 2px 0 rgba(66, 165, 245, 0.14), 0 3px 1px -2px rgba(66, 165, 245, 0.2), 0 1px 5px 0 rgba(66, 165, 245, 0.12);
   box-shadow: 0 2px 2px 0 rgba(66, 165, 245, 0.14), 0 3px 1px -2px rgba(66, 165, 245, 0.2), 0 1px 5px 0 rgba(66, 165, 245, 0.12);
   -webkit-transition: 0.2s ease-in;
@@ -3036,8 +3036,8 @@ table.dataTable thead .sorting::after {
   transition: 0.2s ease-in;
 }
 .btn-info:hover {
-  background: #1976d2;
-  border: 1px solid #1976d2;
+  background: #004488;
+  border: 1px solid #004488;
   -webkit-box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
   box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
 }
@@ -3062,8 +3062,8 @@ table.dataTable thead .sorting::after {
   border: 1px solid #028ee1;
 }
 .btn-info.disabled {
-  background: #1976d2;
-  border: 1px solid #1976d2;
+  background: #004488;
+  border: 1px solid #004488;
   -webkit-box-shadow: 0 2px 2px 0 rgba(66, 165, 245, 0.14), 0 3px 1px -2px rgba(66, 165, 245, 0.2), 0 1px 5px 0 rgba(66, 165, 245, 0.12);
   box-shadow: 0 2px 2px 0 rgba(66, 165, 245, 0.14), 0 3px 1px -2px rgba(66, 165, 245, 0.2), 0 1px 5px 0 rgba(66, 165, 245, 0.12);
   -webkit-transition: 0.2s ease-in;
@@ -3071,8 +3071,8 @@ table.dataTable thead .sorting::after {
   transition: 0.2s ease-in;
 }
 .btn-info.disabled:hover {
-  background: #1976d2;
-  border: 1px solid #1976d2;
+  background: #004488;
+  border: 1px solid #004488;
   -webkit-box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
   box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
 }
@@ -3487,9 +3487,9 @@ table.dataTable thead .sorting::after {
   background: #1eacbe;
 }
 .btn-outline-info {
-  color: #1976d2;
+  color: #004488;
   background-color: transparent;
-  border-color: #1976d2;
+  border-color: #004488;
   -webkit-box-shadow: 0 2px 2px 0 rgba(66, 165, 245, 0.14), 0 3px 1px -2px rgba(66, 165, 245, 0.2), 0 1px 5px 0 rgba(66, 165, 245, 0.12);
   box-shadow: 0 2px 2px 0 rgba(66, 165, 245, 0.14), 0 3px 1px -2px rgba(66, 165, 245, 0.2), 0 1px 5px 0 rgba(66, 165, 245, 0.12);
   -webkit-transition: 0.2s ease-in;
@@ -3497,16 +3497,16 @@ table.dataTable thead .sorting::after {
   transition: 0.2s ease-in;
 }
 .btn-outline-info:focus {
-  background: #1976d2;
-  border-color: #1976d2;
+  background: #004488;
+  border-color: #004488;
   color: #ffffff;
   -webkit-box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
   box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
   background: #028ee1;
 }
 .btn-outline-info:hover {
-  background: #1976d2;
-  border-color: #1976d2;
+  background: #004488;
+  border-color: #004488;
   color: #ffffff;
   -webkit-box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
   box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
@@ -3517,8 +3517,8 @@ table.dataTable thead .sorting::after {
   background: #028ee1;
 }
 .btn-outline-info.focus {
-  background: #1976d2;
-  border-color: #1976d2;
+  background: #004488;
+  border-color: #004488;
   color: #ffffff;
   -webkit-box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
   box-shadow: 0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2);
@@ -5653,8 +5653,8 @@ tbody tr td:last-child {
 }
 .customtab li a.nav-link.active,
 .profile-tab li a.nav-link.active {
-  border-bottom: 2px solid #1976d2;
-  color: #1976d2;
+  border-bottom: 2px solid #004488;
+  color: #004488;
 }
 .card-two {
   position: relative;
@@ -5719,7 +5719,7 @@ tbody tr td:last-child {
   width: 33.333333%;
   float: left;
   text-align: center;
-  color: #1976d2;
+  color: #004488;
 }
 .card-two .contacts a:hover {
   color: #333;
@@ -5737,7 +5737,7 @@ tbody tr td:last-child {
   line-height: 39px;
   overflow: hidden;
   text-align: center;
-  border: 2px solid #1976d2;
+  border: 2px solid #004488;
   border-radius: 50%;
 }
 .card-two .contacts a .fa:before {
@@ -5753,7 +5753,7 @@ tbody tr td:last-child {
   height: 100%;
   -webkit-transition: top 0.3s;
   transition: top 0.3s;
-  background: #1976d2;
+  background: #004488;
 }
 .card-two .contacts a:last-of-type .fa {
   line-height: 36px;
