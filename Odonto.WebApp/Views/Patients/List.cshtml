@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Odonto.Models.Patient>
+@{
+    ViewData["Title"] = "Listar Pacientes";
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Lista de Pacientes</h4>
+			<h6 class="card-subtitle">Filtre os pacientes por Nome ou CPF</h6>
+			<div class="table-responsive m-t-10">
+				<table id="myTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>CPF</th>
+							<th>Nome</th>
+							<th class="hidden-sm-down">Sexo</th>
+							<th class="hidden-sm-down">Telefone</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.CPF</td>
+								<td><a href="@Url.Action("Record", "Patients", new { patientId = item.ID })">@item.Name @item.LastName</a></td>
+								<td class="hidden-sm-down">@item.SexString</td>
+								<td class="hidden-sm-down">@item.Phone</td>
+								<td></td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

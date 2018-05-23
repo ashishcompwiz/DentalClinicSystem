@@ -1,0 +1,52 @@
+﻿@model Odonto.Models.Patient
+@{
+	ViewData["Title"] = "Prontuário do Paciente";
+}
+<div class="col-md-12">
+	<div class="card card-with-error">
+		<div class="card-body">
+			<form action="" method="post">
+				<div class="form-body show-record">
+					<h2 class="m-t-5">@Model.Name @Model.LastName
+						<a href="#" class="pull-right btn btn-warning"><i class="fa fa-pencil"></i> Editar</a>
+					</h2>
+					<hr>
+					<div class="row m-t-20">
+						<div class="col-md-4">
+							<h5><strong>CPF</strong></h5>
+							<h5>@Model.CPF</h5>
+						</div>
+						<div class="col-md-4">
+							<h5><strong>Data de Nascimento</strong></h5>
+							<h5>@Model.BirthDate.ToShortDateString()</h5>
+						</div>
+						<div class="col-md-4">
+							<h5><strong>Sexo</strong></h5>
+							<h5>@Model.SexString</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<h5><strong>Profissão</strong></h5>
+							<h5>@Model.Profession</h5>
+						</div>
+						<div class="col-md-4">
+							<h5><strong>Telefone</strong></h5>
+							<h5>@Model.Phone</h5>
+						</div>
+						<div class="col-md-4">
+							<h5><strong>Telefone 2</strong></h5>
+							<h5>@Model.Phone2</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<h5><strong>Endereço</strong></h5>
+							<h5>@Model.AddressString</h5>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

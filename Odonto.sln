@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odonto.WebApp", "Odonto.WebApp\Odonto.WebApp.csproj", "{CF16CC2E-3DE7-4AE1-8D47-FCC84470B80D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odonto.Models", "Odonto.Models\Odonto.Models.csproj", "{7EAE7ACC-B21E-4969-9D10-B6F34A74A7AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Odonto.DAO", "Odonto.DAO\Odonto.DAO.csproj", "{0EC74332-3B81-4F50-A26D-19F3C70B3E7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF16CC2E-3DE7-4AE1-8D47-FCC84470B80D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF16CC2E-3DE7-4AE1-8D47-FCC84470B80D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF16CC2E-3DE7-4AE1-8D47-FCC84470B80D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF16CC2E-3DE7-4AE1-8D47-FCC84470B80D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EAE7ACC-B21E-4969-9D10-B6F34A74A7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EAE7ACC-B21E-4969-9D10-B6F34A74A7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EAE7ACC-B21E-4969-9D10-B6F34A74A7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EAE7ACC-B21E-4969-9D10-B6F34A74A7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC74332-3B81-4F50-A26D-19F3C70B3E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC74332-3B81-4F50-A26D-19F3C70B3E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC74332-3B81-4F50-A26D-19F3C70B3E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC74332-3B81-4F50-A26D-19F3C70B3E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C58C486A-C8ED-4298-ACC7-D8D5391F84C9}
+	EndGlobalSection
+EndGlobal

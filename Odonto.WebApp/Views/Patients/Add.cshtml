@@ -1,0 +1,125 @@
+﻿@model Odonto.Models.Patient
+@{
+	ViewData["Title"] = "Adicionar Paciente";
+}
+<div class="col-md-12">
+	<div class="card card-with-error">
+		@if (!ViewData.ModelState.IsValid)
+		{
+			<div class="card-header">
+				Preencha todos os campos obrigatórios
+			</div>
+		}
+		<div class="card-body">
+			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
+				<input type="hidden" asp-for="ID" />
+				<div class="form-body">
+					<h3 class="m-t-5">Informações Pessoais</h3>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Nome *</label>
+								<input type="text" asp-for="Name" class="form-control" required />
+								<span asp-validation-for="Name" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group has-info">
+								<label class="control-label">Sobrenome *</label>
+								<input type="text" asp-for="LastName" class="form-control" required />
+								<span asp-validation-for="LastName" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">CPF *</label>
+								<input type="text" asp-for="CPF" class="form-control" maxlength="11" placeholder="somente números" required />
+								<span asp-validation-for="CPF" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Data de Nascimento *</label>
+								<input type="date" asp-for="BirthDate" class="form-control" required />
+								<span asp-validation-for="BirthDate" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Sexo *</label><br />
+								<div class="form-group">
+									<input asp-for="Sex" type="radio" value="F" /> Feminino &nbsp;&nbsp;
+									<input asp-for="Sex" type="radio" value="M" /> Masculino
+								</div>
+								<span asp-validation-for="Sex" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Profissão</label>
+								<input type="text" asp-for="Profession" class="form-control" />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Telefone *</label>
+								<input type="text" asp-for="Phone" class="form-control" required />
+								<span asp-validation-for="Phone" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Telefone 2</label>
+								<input type="text" asp-for="Phone2" class="form-control" />
+							</div>
+						</div>
+					</div>
+
+					<h4 class="m-t-10">Endereço</h4>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Rua/Avenida *</label>
+								<input type="text" asp-for="Address" class="form-control" required />
+								<span asp-validation-for="Address" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Número *</label>
+								<input type="text" asp-for="Number" class="form-control" required />
+								<span asp-validation-for="Number" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Cidade *</label>
+								<input type="text" asp-for="City" class="form-control" required />
+								<span asp-validation-for="City" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Estado *</label>
+								<input type="text" asp-for="State" class="form-control" maxlength="2" required />
+								<span asp-validation-for="State" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions text-right">
+					<button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+					<button type="button" class="btn btn-inverse">Cancelar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
