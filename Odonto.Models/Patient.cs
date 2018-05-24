@@ -8,6 +8,8 @@ namespace Odonto.Models
     {
         public string Profession { get; set; }
 
+        public PatientRecord Record { get; set; }
+
         public Person GetBase()
         {
             return (Person)this;

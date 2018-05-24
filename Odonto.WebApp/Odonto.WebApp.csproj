@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Odonto.Models\Odonto.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>

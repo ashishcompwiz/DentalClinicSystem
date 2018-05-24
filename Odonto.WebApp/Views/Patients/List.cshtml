@@ -7,29 +7,37 @@
 	<div class="card">
 		<div class="card-body">
 			<h4 class="card-title">Lista de Pacientes</h4>
-			<h6 class="card-subtitle">Filtre os pacientes por Nome ou CPF</h6>
-			<div class="table-responsive m-t-10">
+			<form method="get">
+				<div class="row">
+					<div class="col-2 col-md-2 text-right"><label class="control-label filter">CPF </label></div>
+					<div class="col-10 col-md-3 text-right"><input name="cpf" type="text" class="form-control filter" value="@ViewBag.cpf" /></div>
+					<div class="col-2 col-md-2 text-right"><label class="control-label filter">Nome </label></div>
+					<div class="col-10 col-md-3 text-right"><input name="name" type="text" class="form-control filter" value="@ViewBag.name" /></div>
+					<div class="col-12 col-md-2 text-right"><button class="btn btn-success" type="submit"><i class="fa fa-search"></i> Filtrar</button></div>
+				</div>
+			</form>
+			<div class="table-responsive m-t-20">
 				<table id="myTable" class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<th>CPF</th>
+							<th width="20%" class="text-center">CPF</th>
 							<th>Nome</th>
-							<th class="hidden-sm-down">Sexo</th>
-							<th class="hidden-sm-down">Telefone</th>
-							<th class="text-center"></th>
+							<th width="10%" class="text-center hidden-sm-down">Sexo</th>
+							<th width="12%" class="text-center hidden-sm-down">Telefone</th>
+							<th width="10%" class="text-center"></th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach (var item in Model)
 						{
 							<tr>
-								<td>@item.CPF</td>
-								<td><a title="Clique para ver o prontuário" href="@Url.Action("Record", "Patients", new { patientId = item.ID })">@item.Name @item.LastName</a></td>
-								<td class="hidden-sm-down">@item.SexString</td>
-								<td class="hidden-sm-down">@item.Phone</td>
+								<td class="text-center">@item.CPF</td>
+								<td><a title="Clique para ver o prontuário" href="@Url.Action("Profile", "Patients", new { id = item.ID })">@item.Name @item.LastName</a></td>
+								<td class="text-center hidden-sm-down">@item.SexString</td>
+								<td class="text-center hidden-sm-down">@item.Phone</td>
 								<td class="text-center">
-									<a title="Editar" class="text-warning" asp-action="Edit" asp-controller="Patients" asp-route-id="@item.ID"><i class="fa fa-pencil fa-lg"></i></a>&nbsp;
-									<a title="Remover" class="text-danger" asp-action="Remove" asp-controller="Patients" asp-route-id="@item.ID"><i class="fa fa-trash fa-lg"></i></a>
+									<a title="Editar" class="text-warning" asp-action="Edit" asp-controller="Patients" asp-route-id="@item.ID"><i class="fa fa-pencil fa-lg"></i></a>
+									@*&nbsp;<a title="Remover" class="text-danger" asp-action="Remove" asp-controller="Patients" asp-route-id="@item.ID"><i class="fa fa-trash fa-lg"></i></a>*@
 								</td>
 							</tr>
 						}

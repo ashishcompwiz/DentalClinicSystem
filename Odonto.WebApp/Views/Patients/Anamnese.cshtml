@@ -1,0 +1,79 @@
+﻿@model Odonto.Models.PatientRecord
+@{
+	ViewData["Title"] = ViewData["Action"] + " Paciente";
+}
+<div class="col-md-12">
+	<div class="card card-with-error">
+		<div class="card-body">
+			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
+				<input type="hidden" asp-for="PatientID" />
+				<div class="form-body">
+					<h3 class="m-t-5">Anamnese de @ViewBag.PatientName</h3>
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Queixa Principal</label>
+								<textarea asp-for="MainComplaint" rows="4" class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 alterations">
+							<h4>Alterações Sistêmicas</h4>
+							@{
+								var index = 0;
+								foreach (var item in ViewBag.Diseases)
+								{
+									<div class="form-group m-b-5">
+										<input class="checkbox" name="diseases" type="checkbox" value="@index-@item.ID" />&nbsp;
+										<label class="control-label">@item.Name</label>&nbsp;&nbsp;
+										<input class="form-control" name="descriptions" type="text" />
+									</div>
+									index++;
+								}
+							}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Alergias / Outras Alterações</label>
+								<textarea asp-for="Alterations" rows="4" class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Uso de Medicamentos</label>
+								<textarea asp-for="Medicines" rows="4" class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-input">
+								<label class="control-label">Está sob tratamento psicológico: </label>&nbsp;&nbsp;
+								<input asp-for="PsychologicalTreatment" type="radio" value="true" /> <label class="control-label">Sim</label>&nbsp;&nbsp;
+								<input asp-for="PsychologicalTreatment" type="radio" value="false" /> <label class="control-label">Não</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Diagnóstico</label>
+								<textarea asp-for="Diagnose" rows="4" class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions text-right">
+					<button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+					<button type="button" class="btn btn-inverse" onclick="window.history.back()">Cancelar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

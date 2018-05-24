@@ -1,0 +1,70 @@
+﻿@using Odonto.Models
+@model PatientRecord
+
+@if (Model != null)
+{
+	<div class="card">
+		<div class="card-body">
+			<div class="show-record">
+				<h2 class="m-t-5">Anamnese</h2>
+				<hr>
+				<div class="row m-t-20">
+					@if (Model.MainComplaint != null)
+					{
+						<div class="col-md-12">
+							<dl>
+								<dt>Queixa Principal</dt>
+								<dd>@Model.MainComplaint</dd>
+							</dl>
+						</div>
+					}
+					@if (Model.Diseases != null && Model.Diseases.Any())
+					{
+						<div class="col-md-12">
+							<dl>
+								<dt>Alterações Sistêmicas</dt>
+								@foreach (var item in Model.Diseases)
+								{
+									<dd>@item.DiseaseLabel: @item.Description</dd>
+								}
+							</dl>
+						</div>
+					}
+					@if (Model.Alterations != null)
+					{
+						<div class="col-md-12">
+							<dl>
+								<dt>Alergias / Outras Alterações</dt>
+								<dd>@Model.Alterations</dd>
+							</dl>
+						</div>
+					}
+					@if (Model.Medicines != null)
+					{
+						<div class="col-md-12">
+							<dl>
+								<dt>Uso de Medicamentos</dt>
+								<dd>@Model.Medicines</dd>
+							</dl>
+						</div>
+					}
+					<div class="col-md-12">
+						<dl>
+							<dt>Está sob tratamento psicológico:</dt>
+							<dd>@(Model.PsychologicalTreatment ? "Sim" : "Não")</dd>
+						</dl>
+					</div>
+					@if (Model.Diagnose != null)
+					{
+						<div class="col-md-12">
+							<dl>
+								<dt>Diagnóstico</dt>
+								<dd>@Model.Diagnose</dd>
+							</dl>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+}

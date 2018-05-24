@@ -15,27 +15,16 @@ namespace Odonto.DAO
             strConnection = strConn;
         }
 
-        public List<Disease> GetAll()
+        public List<Disease> GetAll(int clinicId)
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                var list = sql.Query<Disease>("SELECT * FROM Diseases ORDER BY ID DESC").AsList();
+                var list = sql.Query<Disease>("SELECT ID, Name FROM Diseases WHERE ClinicId = @clinicId ORDER BY Name", new { clinicId }).AsList();
                 return list;
             }
         }
 
-        public List<Disease> GetByPage(int Page, int Size)
-        {
-            int IndexStart = (Page * Size) - Size;
-            int IndexEnd = Page * Size;
-            using (var sql = new SqlConnection(strConnection))
-            {
-                var list = sql.Query<Disease>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Diseases) As Diseases WHERE Diseases.RowIndex > " + IndexStart + " AND Diseases.RowIndex <= " + IndexEnd).AsList();
-                return list;
-            }
-        }
-
-        public Disease Get(int ID)
+        public Disease GetById(int ID)
         {
             using (var sql = new SqlConnection(strConnection))
             {
@@ -62,7 +51,7 @@ namespace Odonto.DAO
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                var resp = sql.Execute(@"UPDATE Diseases SET ID = @ID,ClinicID = @ClinicID,Name = @Name
+                var resp = sql.Execute(@"UPDATE Diseases SET ClinicID = @ClinicID,Name = @Name
                                             WHERE ID=@ID",
                                         new
                                         {
@@ -74,7 +63,7 @@ namespace Odonto.DAO
             }
         }
 
-        public bool Remove(string ID)
+        public bool Remove(int ID)
         {
             using (var sql = new SqlConnection(strConnection))
             {

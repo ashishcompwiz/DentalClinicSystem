@@ -23,6 +23,20 @@ namespace Odonto.DAO
             }
         }
 
+        public List<Patient> GetFiltered(int clinicId, string name, string cpf)
+        {
+            string query = "SELECT * FROM Patients LEFT JOIN Persons ON Patients.ID = Persons.ID WHERE Persons.ClinicID = " + clinicId;
+            query += !string.IsNullOrEmpty(name) ? " AND Name LIKE '%" + name + "%'" : "";
+            query += !string.IsNullOrEmpty(cpf) ? " AND CPF LIKE '%" + cpf + "%'" : "";
+            query += " ORDER BY Name";
+
+            using (var sql = new SqlConnection(strConnection))
+            {
+                var list = sql.Query<Patient>(query).AsList();
+                return list;
+            }
+        }
+
         public List<Patient> GetByPage(int Page, int Size)
         {
             int IndexStart = (Page * Size) - Size;
@@ -95,7 +109,7 @@ namespace Odonto.DAO
             return false;
         }
 
-        public bool Remove(string ID)
+        public bool Remove(int ID)
         {
             using (var sql = new SqlConnection(strConnection))
             {
