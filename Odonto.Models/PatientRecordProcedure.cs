@@ -19,5 +19,10 @@ namespace Odonto.Models
         public string Description { get; set; }
 
         public decimal Value { get; set; }
+
+        /* Helpers */
+        public string ProcedureLabel { get; set; }
+
+        public string DentistName { get; set; }
     }
 }

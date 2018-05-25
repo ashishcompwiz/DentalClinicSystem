@@ -39,7 +39,7 @@ namespace Odonto.DAO
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                return sql.QueryFirstOrDefault<PatientRecord>("SELECT * FROM PatientsRecord WHERE ID = @ID", new { ID = ID });
+                return sql.QueryFirstOrDefault<PatientRecord>("SELECT * FROM PatientsRecord WHERE PatientID = @ID", new { ID = ID });
             }
         }
 
@@ -58,7 +58,11 @@ namespace Odonto.DAO
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                var list = sql.Query<PatientRecordProcedure>("SELECT * FROM PatientsRecordProcedure WHERE PatientRecordID = @PatientRecordID", new { PatientRecordID = patientId }).AsList();
+                var list = sql.Query<PatientRecordProcedure>(@"SELECT Persons.Name + ' ' + Persons.LastName As DentistName, Record.ID, Record.Description, PatientRecordID, DentistID, ProcedureID, Date, Record.Value, Procedures.Name As ProcedureLabel
+                                                                FROM PatientsRecordProcedure As Record LEFT JOIN Procedures ON Record.ProcedureID = Procedures.ID
+                                                                LEFT JOIN Persons ON Record.DentistID = Persons.ID
+                                                                WHERE PatientRecordID = @PatientRecordID", 
+                                                                new { PatientRecordID = patientId }).AsList();
                 return list;
             }
         }

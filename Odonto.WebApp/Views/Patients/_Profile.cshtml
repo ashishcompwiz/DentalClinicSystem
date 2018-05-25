@@ -1,9 +1,8 @@
 ﻿@model Odonto.Models.Patient
-@{
-	ViewData["Title"] = "Prontuário do Paciente";
-}
-<div class="col-md-12">
-	<div class="card card-with-error">
+
+@if (Model != null)
+{
+	<div class="card">
 		<div class="card-body">
 			<div class="show-record">
 				<h2 class="m-t-5">
@@ -65,5 +64,4 @@
 			</div>
 		</div>
 	</div>
-	@Html.Partial("_Anamnese", Model.Record)
-</div>
+}

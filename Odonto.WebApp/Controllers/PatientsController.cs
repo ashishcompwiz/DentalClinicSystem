@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
 using Odonto.WebApp.Helpers.Auth;
-using Odonto.WebApp.Helpers.Utils;
 using System;
 
 namespace Odonto.WebApp.Controllers
@@ -26,6 +25,7 @@ namespace Odonto.WebApp.Controllers
             PatientRecordDAO = new PatientRecordDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
         }
 
+        #region CRUD
         [HttpGet]
         public IActionResult Add()
         {
@@ -51,7 +51,7 @@ namespace Odonto.WebApp.Controllers
             Model.CreatedBy = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
             int id = PatientsDAO.Add(Model);
 
-            return RedirectToAction("Profile", new { id });
+            return RedirectToAction("Records", new { id });
         }
 
         [HttpGet]
@@ -82,11 +82,12 @@ namespace Odonto.WebApp.Controllers
             Model.UpdatedBy = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
             PatientsDAO.Edit(Model);
 
-            return RedirectToAction("Profile", new { id = Model.ID});
+            return RedirectToAction("Records", new { id = Model.ID});
         }
+        #endregion
 
         [HttpGet]
-        public IActionResult Profile(int id)
+        public IActionResult Records(int id)
         {
             if (id == 0)
                 return RedirectToAction("Index", "Dashboard");
@@ -120,8 +121,9 @@ namespace Odonto.WebApp.Controllers
             return View(patientList);
         }
 
+        #region Anamnesis
         [HttpGet]
-        public IActionResult Anamnese(int id)
+        public IActionResult AddAnamnesis(int id)
         {
             if (id == 0)
                 return RedirectToAction("Index", "Dashboard");
@@ -141,7 +143,7 @@ namespace Odonto.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Anamnese(PatientRecord Model, string[] diseases, string[] descriptions)
+        public IActionResult AddAnamnesis(PatientRecord Model, string[] diseases, string[] descriptions)
         {
             ViewBag.Diseases = DiseasesDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
 
@@ -159,7 +161,8 @@ namespace Odonto.WebApp.Controllers
             PatientRecordDAO.Add(Model);
             PatientRecordDAO.AddDiseases(Model.Diseases);
 
-            return RedirectToAction("Profile", new { id = Model.PatientID });
+            return RedirectToAction("Records", new { id = Model.PatientID });
         }
+        #endregion
     }
 }

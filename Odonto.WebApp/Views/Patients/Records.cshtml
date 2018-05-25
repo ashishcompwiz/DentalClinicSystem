@@ -1,0 +1,9 @@
+﻿@model Odonto.Models.Patient
+@{
+	ViewData["Title"] = "Prontuário do Paciente";
+}
+<div class="col-md-12">
+	@Html.Partial("_Profile", Model)
+	@Html.Partial("_Anamnesis", Model.Record)
+	@Html.Partial("_Procedures", Model.Record.Procedures)
+</div>

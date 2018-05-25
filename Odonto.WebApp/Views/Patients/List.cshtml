@@ -32,7 +32,7 @@
 						{
 							<tr>
 								<td class="text-center">@item.CPF</td>
-								<td><a title="Clique para ver o prontuário" href="@Url.Action("Profile", "Patients", new { id = item.ID })">@item.Name @item.LastName</a></td>
+								<td><a title="Clique para ver o prontuário" href="@Url.Action("Records", "Patients", new { id = item.ID })">@item.Name @item.LastName</a></td>
 								<td class="text-center hidden-sm-down">@item.SexString</td>
 								<td class="text-center hidden-sm-down">@item.Phone</td>
 								<td class="text-center">
