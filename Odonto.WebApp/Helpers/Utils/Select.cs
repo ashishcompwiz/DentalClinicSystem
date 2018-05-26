@@ -10,7 +10,7 @@ namespace Odonto.WebApp.Helpers.Utils
             var selectList = new List<SelectListItem>();
 
             foreach (var item in list)
-                selectList.Add(new SelectListItem { Text = item.Name, Value = item.id.ToString() });
+                selectList.Add(new SelectListItem { Text = item.Name, Value = item.ID.ToString() });
 
             return selectList;
         }

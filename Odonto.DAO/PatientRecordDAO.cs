@@ -61,7 +61,8 @@ namespace Odonto.DAO
                 var list = sql.Query<PatientRecordProcedure>(@"SELECT Persons.Name + ' ' + Persons.LastName As DentistName, Record.ID, Record.Description, PatientRecordID, DentistID, ProcedureID, Date, Record.Value, Procedures.Name As ProcedureLabel
                                                                 FROM PatientsRecordProcedure As Record LEFT JOIN Procedures ON Record.ProcedureID = Procedures.ID
                                                                 LEFT JOIN Persons ON Record.DentistID = Persons.ID
-                                                                WHERE PatientRecordID = @PatientRecordID", 
+                                                                WHERE PatientRecordID = @PatientRecordID
+                                                                ORDER BY Date DESC", 
                                                                 new { PatientRecordID = patientId }).AsList();
                 return list;
             }
@@ -109,6 +110,25 @@ namespace Odonto.DAO
                                 });
                 }
                 return true; 
+            }
+        }
+
+        public bool AddProcedure(PatientRecordProcedure PatientProcedure)
+        {
+            using (var sql = new SqlConnection(strConnection))
+            {
+                sql.Execute(@"INSERT INTO PatientsRecordProcedure (PatientRecordID,ProcedureID,DentistID,Description,Value,Date)
+                            VALUES (@PatientRecordID,@ProcedureID,@DentistID,@Description,@Value,@Date)",
+                            new
+                            {
+                                PatientRecordID = PatientProcedure.PatientRecordID,
+                                ProcedureID = PatientProcedure.ProcedureID,
+                                DentistID = PatientProcedure.DentistID,
+                                Description = PatientProcedure.Description,
+                                Value = PatientProcedure.Value,
+                                Date = PatientProcedure.Date,
+                            });
+                return true;
             }
         }
 

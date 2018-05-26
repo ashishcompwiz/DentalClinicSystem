@@ -6,9 +6,7 @@
 	<div class="card card-with-error">
 		@if (!ViewData.ModelState.IsValid)
 		{
-			<div class="card-header">
-				Preencha todos os campos obrigatórios
-			</div>
+			<div class="card-header">Preencha todos os campos obrigatórios</div>
 		}
 		<div class="card-body">
 			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
@@ -117,7 +115,7 @@
 				</div>
 				<div class="form-actions text-right">
 					<button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
-					<button type="button" class="btn btn-inverse" onclick="window.history.back()">Cancelar</button>
+					<button type="button" class="btn btn-outline-inverse" onclick="window.history.back()">Cancelar</button>
 				</div>
 			</form>
 		</div>

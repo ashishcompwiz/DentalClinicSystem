@@ -1,0 +1,84 @@
+﻿@model Odonto.Models.PatientRecordProcedure
+@{
+	ViewData["Title"] = ViewData["Action"];
+}
+<div class="col-md-12">
+	<div class="card card-with-error">
+		@if (!ViewData.ModelState.IsValid)
+		{
+			<div class="card-header">Preencha todos os campos obrigatórios</div>
+		}
+		<div class="card-body">
+			<form action="" method="post">
+				<input type="hidden" asp-for="PatientRecordID" />
+				<div class="form-body">
+					<h3 class="m-t-5">@ViewData["Action"]  -  Paciente @ViewBag.PatientName</h3>
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Dentista *</label>
+								<select asp-for="DentistID" class="form-control col-md-6" required>
+									<option value="">Selecione o dentista</option>;
+									@foreach (var item in ViewBag.Dentists)
+									{
+									<option value="@item.ID">@item.Name @item.LastName (@item.Specialty)</option>;
+									}
+								</select>
+								<span asp-validation-for="DentistID" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Procedimento *</label>
+								<select class="form-control col-md-6" required asp-for="ProcedureID" onchange="setProcedureValue(this.value)">
+									<option value="">Selecione um procedimento</option>;
+									@foreach (var item in ViewBag.Procedures)
+									{
+										<option value="@item.ID">@item.Name</option>;
+									}
+								</select>
+								<span asp-validation-for="ProcedureID" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Descrição</label>
+								<textarea class="form-control" asp-for="Description" rows="6"></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Data *</label>
+								<input class="form-control col-md-3 col-sm-6" type="date" asp-for="Date" required />
+								<span asp-validation-for="Date" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Valor *</label>
+								<input class="form-control col-md-3 col-sm-6" type="text" asp-for="Value" required />
+								<span asp-validation-for="Value" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="form-actions text-right">
+					<button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+					<button type="button" class="btn btn-outline-inverse" onclick="window.history.back()">Cancelar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	function setProcedureValue(procedureId) {
+		@foreach (var item in ViewBag.Procedures)
+		{ 
+			@:if ("@item.ID" == procedureId)
+				@:document.getElementById('Value').value = "@item.Value";
+		}
+	}
+</script>

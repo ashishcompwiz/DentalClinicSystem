@@ -14,11 +14,11 @@ namespace Odonto.DAO
             strConnection = strConn;
         }
 
-        public List<Dentist> GetAll()
+        public List<Dentist> GetAll(int clinicId)
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                var list = sql.Query<Dentist>("SELECT * FROM Dentists ORDER BY ID DESC").AsList();
+                var list = sql.Query<Dentist>("SELECT * FROM Dentists LEFT JOIN Persons ON Dentists.ID = Persons.ID WHERE Persons.ClinicID = @ClinicID ORDER BY Name", new { ClinicID = clinicId }).AsList();
                 return list;
             }
         }
@@ -34,7 +34,7 @@ namespace Odonto.DAO
             }
         }
 
-        public Dentist Get(int ID)
+        public Dentist GetById(int ID)
         {
             using (var sql = new SqlConnection(strConnection))
             {

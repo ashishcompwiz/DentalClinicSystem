@@ -13,38 +13,38 @@ namespace Odonto.Models
 
         public int ClinicID { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string CPF { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public char Sex { get; set; }
 
         public string CEP { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string Number { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string State { get; set; } = "RS";
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string Phone { get; set; }
 
         public string Phone2 { get; set; }
 
-        [Required(ErrorMessage = "O campo é obrigatório")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public DateTime BirthDate { get; set; } = DateTime.Now;
 
         public DateTime CreatedOn { get; set; }

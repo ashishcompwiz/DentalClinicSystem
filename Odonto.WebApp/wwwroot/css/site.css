@@ -79,17 +79,19 @@ a, button {
 }
 
 .btn-success {
-	background: #23d279;
-	border: 1px solid #23d279;
-	-webkit-box-shadow: 0 2px 2px 0 rgba(35, 210, 121, 0.14), 0 3px 1px -2px rgba(35, 210, 121, 0.2), 0 1px 5px 0 rgba(35, 210, 121, 0.12);
-	box-shadow: 0 2px 2px 0 rgba(35, 210, 121, 0.14), 0 3px 1px -2px rgba(35, 210, 121, 0.2), 0 1px 5px 0 rgba(35, 210, 121, 0.12);
+	background: #299a5c;
+	border: 1px solid #299a5c;
+	-webkit-box-shadow: 0 2px 2px 0 rgba(41, 154, 92, 0.14), 0 3px 1px -2px rgba(41, 154, 92, 0.2), 0 1px 5px 0 rgba(41, 154, 92, 0.12);
+	box-shadow: 0 2px 2px 0 rgba(41, 154, 92, 0.14), 0 3px 1px -2px rgba(41, 154, 92, 0.2), 0 1px 5px 0 rgba(41, 154, 92, 0.12);
+	color: #fff;
 }
 
-	.btn-success:hover {
-		background: #2efb92;
-		-webkit-box-shadow: 0 14px 26px -12px rgba(46, 251, 146, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(46, 251, 146, 0.2);
-		box-shadow: 0 14px 26px -12px rgba(46, 251, 146, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(46, 251, 146, 0.2);
-		border: 1px solid #2efb92;
+	.btn-success:hover, .btn-success:focus {
+		background: #38c577;
+		-webkit-box-shadow: 0 14px 26px -12px rgba(56, 197, 119, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(56, 197, 119, 0.2);
+		box-shadow: 0 14px 26px -12px rgba(56, 197, 119, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(56, 197, 119, 0.2);
+		border: 1px solid #38c577;
+		color: #fff;
 	}
 
 .btn-primary {
@@ -100,11 +102,13 @@ a, button {
 	-webkit-transition: 0.2s ease-in;
 	-o-transition: 0.2s ease-in;
 	transition: 0.2s ease-in;
+	color: #fff;
 }
-	.btn-primary:hover {
+	.btn-primary:hover, .btn-primary:focus {
 		background: #004488;
 		-webkit-box-shadow: 0 14px 26px -12px rgba(0, 68, 136, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 68, 136, 0.2);
 		box-shadow: 0 14px 26px -12px rgba(0, 68, 136, 0.42), 0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 68, 136, 0.2);
+		color: #fff;
 	}
 
 input .filter {
@@ -129,4 +133,28 @@ div.alterations {
 
 textarea.form-control {
 	height: auto;
+}
+
+.modal-header .close {
+	font-size: 25px;
+}
+
+.btn-add-flyout {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	z-index: 1;
+}
+
+.fixed-top {
+	top: 0 !important;
+}
+
+}
+
+.heaaad {
+	position: relative;
+	z-index: 50;
+	background: #fff;
+	box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
 }

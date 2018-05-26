@@ -15,11 +15,11 @@ namespace Odonto.DAO
             strConnection = strConn;
         }
 
-        public List<Procedure> GetAll()
+        public List<Procedure> GetAll(int clinicId)
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                var list = sql.Query<Procedure>("SELECT * FROM Procedures ORDER BY ID DESC").AsList();
+                var list = sql.Query<Procedure>("SELECT * FROM Procedures WHERE ClinicId = @clinicId ORDER BY Name", new { clinicId }).AsList();
                 return list;
             }
         }
@@ -35,11 +35,19 @@ namespace Odonto.DAO
             }
         }
 
-        public Procedure Get(int ID)
+        public Procedure GetById(int ID)
         {
             using (var sql = new SqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<Procedure>("SELECT * FROM Procedures WHERE ID = @ID", new { ID = ID });
+            }
+        }
+
+        public decimal GetValue(int ID)
+        {
+            using (var sql = new SqlConnection(strConnection))
+            {
+                return sql.QueryFirstOrDefault<decimal>("SELECT Value FROM Procedures WHERE ID = @ID", new { ID = ID });
             }
         }
 

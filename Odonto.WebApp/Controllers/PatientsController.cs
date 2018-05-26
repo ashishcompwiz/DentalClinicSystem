@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
 using Odonto.WebApp.Helpers.Auth;
+using Odonto.WebApp.Helpers.Utils;
 using System;
 
 namespace Odonto.WebApp.Controllers
@@ -11,6 +12,8 @@ namespace Odonto.WebApp.Controllers
     [TypeFilter(typeof(IsLoggedAttribute))]
     public class PatientsController : Controller
     {
+        private DentistsDAO DentistsDAO;
+        private ProceduresDAO ProceduresDAO;
         private DiseasesDAO DiseasesDAO;
         private PatientsDAO PatientsDAO;
         private PatientRecordDAO PatientRecordDAO;
@@ -20,6 +23,8 @@ namespace Odonto.WebApp.Controllers
         public PatientsController(IConfiguration _config)
         {
             config = _config;
+            DentistsDAO = new DentistsDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
+            ProceduresDAO = new ProceduresDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
             DiseasesDAO = new DiseasesDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
             PatientsDAO = new PatientsDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
             PatientRecordDAO = new PatientRecordDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
@@ -94,7 +99,7 @@ namespace Odonto.WebApp.Controllers
 
             ViewData["Section"] = "Pacientes";
             ViewData["Action"] = "Prontuário Odontológico";
-
+            
             var patient = PatientsDAO.GetById(id);
             var patientRecord = PatientRecordDAO.GetById(id);
             if (patientRecord != null)
@@ -120,6 +125,48 @@ namespace Odonto.WebApp.Controllers
 
             return View(patientList);
         }
+
+        #region Procedure
+        [HttpGet]
+        public IActionResult AddProcedure(int id)
+        {
+            if (id == 0)
+                return RedirectToAction("Index", "Dashboard");
+
+            var patient = PatientsDAO.GetById(id);
+            var procedure = new PatientRecordProcedure();
+            procedure.PatientRecordID = id;
+
+            ViewData["Section"] = "Pacientes";
+            ViewData["Action"] = "Criar Novo Procedimento";
+            ViewBag.Procedures = ProceduresDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
+            ViewBag.Dentists = DentistsDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
+            ViewBag.PatientName = patient.Name + " " + patient.LastName;
+
+            return View(procedure);
+        }
+
+        [HttpPost]
+        public IActionResult AddProcedure(PatientRecordProcedure Model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var patient = PatientsDAO.GetById(Model.PatientRecordID);
+
+                ViewData["Section"] = "Pacientes";
+                ViewData["Action"] = "Criar Novo Procedimento";
+                ViewBag.Procedures = ProceduresDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
+                ViewBag.Dentists = DentistsDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
+                ViewBag.PatientName = patient.Name + " " + patient.LastName;
+
+                return View(Model);
+            }
+
+            PatientRecordDAO.AddProcedure(Model);
+
+            return RedirectToAction("Records", new { id = Model.PatientRecordID });
+        }
+        #endregion
 
         #region Anamnesis
         [HttpGet]
