@@ -14,7 +14,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Queixa Principal</label>
-								<textarea asp-for="MainComplaint" rows="4" class="form-control"></textarea>
+								<textarea asp-for="MainComplaint" rows="4" class="form-control" autofocus></textarea>
 							</div>
 						</div>
 					</div>
@@ -28,7 +28,7 @@
 									<div class="form-group m-b-5">
 										<input class="checkbox" name="diseases" type="checkbox" value="@index-@item.ID" />&nbsp;
 										<label class="control-label">@item.Name</label>&nbsp;&nbsp;
-										<input class="form-control" name="descriptions" type="text" />
+										<input class="form-control" autofocus name="descriptions" type="text" />
 									</div>
 									index++;
 								}
@@ -39,7 +39,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Alergias / Outras Alterações</label>
-								<textarea asp-for="Alterations" rows="4" class="form-control"></textarea>
+								<textarea asp-for="Alterations" rows="4" class="form-control" autofocus></textarea>
 							</div>
 						</div>
 					</div>
@@ -47,7 +47,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Uso de Medicamentos</label>
-								<textarea asp-for="Medicines" rows="4" class="form-control"></textarea>
+								<textarea asp-for="Medicines" rows="4" class="form-control" autofocus></textarea>
 							</div>
 						</div>
 					</div>
@@ -64,7 +64,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Diagnóstico</label>
-								<textarea asp-for="Diagnose" rows="4" class="form-control"></textarea>
+								<textarea asp-for="Diagnose" rows="4" class="form-control" autofocus></textarea>
 							</div>
 						</div>
 					</div>

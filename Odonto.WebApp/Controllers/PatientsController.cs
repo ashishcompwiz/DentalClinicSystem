@@ -30,6 +30,41 @@ namespace Odonto.WebApp.Controllers
             PatientRecordDAO = new PatientRecordDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
         }
 
+        [HttpGet]
+        public IActionResult Records(int id)
+        {
+            ViewData["Section"] = "Pacientes";
+            ViewData["Action"] = "Prontuário Odontológico";
+
+            var patient = PatientsDAO.GetById(id);
+            if (patient == null)
+                return RedirectToAction("Index", "Dashboard");
+
+            var patientRecord = PatientRecordDAO.GetById(id);
+            if (patientRecord != null)
+            {
+                patientRecord.Diseases = PatientRecordDAO.GetDiseases(id);
+                patientRecord.Procedures = PatientRecordDAO.GetProcedures(id);
+                patient.Record = patientRecord;
+            }
+
+            return View(patient);
+        }
+
+        [HttpGet]
+        public IActionResult List(string name, string cpf)
+        {
+            ViewData["Section"] = "Pacientes";
+            ViewData["Action"] = "Listar";
+
+            var patientList = PatientsDAO.GetFiltered(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")), name, cpf);
+
+            ViewBag.cpf = cpf;
+            ViewBag.name = name;
+
+            return View(patientList);
+        }
+
         #region CRUD
         [HttpGet]
         public IActionResult Add()
@@ -62,15 +97,15 @@ namespace Odonto.WebApp.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            if (id == 0)
+            var patient = PatientsDAO.GetById(id);
+
+            if (patient == null)
                 return RedirectToAction("Index", "Dashboard");
 
             ViewData["Section"] = "Pacientes";
             ViewData["Action"] = "Editar";
 
-            var Model = PatientsDAO.GetById(id);
-
-            return View("Add", Model);
+            return View("Add", patient);
         }
 
         [HttpPost]
@@ -91,49 +126,15 @@ namespace Odonto.WebApp.Controllers
         }
         #endregion
 
-        [HttpGet]
-        public IActionResult Records(int id)
-        {
-            if (id == 0)
-                return RedirectToAction("Index", "Dashboard");
-
-            ViewData["Section"] = "Pacientes";
-            ViewData["Action"] = "Prontuário Odontológico";
-            
-            var patient = PatientsDAO.GetById(id);
-            var patientRecord = PatientRecordDAO.GetById(id);
-            if (patientRecord != null)
-            {
-                patientRecord.Diseases = PatientRecordDAO.GetDiseases(id);
-                patientRecord.Procedures = PatientRecordDAO.GetProcedures(id);
-                patient.Record = patientRecord;
-            }
-
-            return View(patient);
-        }
-
-        [HttpGet]
-        public IActionResult List(string name, string cpf)
-        {
-            ViewData["Section"] = "Pacientes";
-            ViewData["Action"] = "Listar";
-
-            var patientList = PatientsDAO.GetFiltered(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")), name, cpf);
-
-            ViewBag.cpf = cpf;
-            ViewBag.name = name;
-
-            return View(patientList);
-        }
-
         #region Procedure
         [HttpGet]
         public IActionResult AddProcedure(int id)
         {
-            if (id == 0)
+            var patient = PatientsDAO.GetById(id);
+
+            if (patient == null)
                 return RedirectToAction("Index", "Dashboard");
 
-            var patient = PatientsDAO.GetById(id);
             var procedure = new PatientRecordProcedure();
             procedure.PatientRecordID = id;
 
@@ -172,7 +173,9 @@ namespace Odonto.WebApp.Controllers
         [HttpGet]
         public IActionResult AddAnamnesis(int id)
         {
-            if (id == 0)
+            var patient = PatientsDAO.GetById(id);
+
+            if (patient == null)
                 return RedirectToAction("Index", "Dashboard");
 
             var anamnese = PatientRecordDAO.GetById(id);
@@ -181,8 +184,9 @@ namespace Odonto.WebApp.Controllers
                 anamnese = new PatientRecord();
                 anamnese.PatientID = id;
             }
-            var patient = PatientsDAO.GetById(id);
 
+            ViewData["Section"] = "Pacientes";
+            ViewData["Action"] = "Criar Anamnese";
             ViewBag.PatientName = patient.Name + " " + patient.LastName;
             ViewBag.Diseases = DiseasesDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
 

@@ -1,18 +1,14 @@
-﻿@model Odonto.Models.Patient
+﻿@model Odonto.Models.Dentist
 @{
-	ViewData["Title"] = ViewData["Action"] + " Paciente";
+	ViewData["Title"] = ViewData["Action"] + " Dentista";
 }
 <div class="col-md-12">
 	<div class="card card-with-error">
-		@if (!ViewData.ModelState.IsValid)
-		{
-			<div class="card-header">Preencha todos os campos obrigatórios</div>
-		}
 		<div class="card-body">
 			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
 				<input type="hidden" asp-for="ID" />
 				<div class="form-body">
-					<h3 class="m-t-5">Informações Pessoais</h3>
+					<h3 class="m-t-5">Informações do Profissional</h3>
 					<hr>
 					<div class="row">
 						<div class="col-md-6">
@@ -31,6 +27,22 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">CRO</label>
+								<input type="text" asp-for="CRO" class="form-control" autofocus required />
+								<span asp-validation-for="CRO" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group has-info">
+								<label class="control-label">Especialidade</label>
+								<input type="text" asp-for="Specialty" class="form-control" autofocus required />
+								<span asp-validation-for="Specialty" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">CPF *</label>
@@ -40,8 +52,8 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Data de Nascimento *</label>
-								<input type="date" asp-for="BirthDate" class="form-control" autofocus required />
+								<label class="control-label">Data de Nascimento</label>
+								<input type="date" asp-for="BirthDate" class="form-control" autofocus />
 								<span asp-validation-for="BirthDate" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
@@ -57,12 +69,6 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-4">
-							<div class="form-group">
-								<label class="control-label">Profissão</label>
-								<input type="text" asp-for="Profession" class="form-control" autofocus />
-							</div>
-						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Telefone *</label>
@@ -83,15 +89,15 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Rua/Avenida *</label>
-								<input type="text" asp-for="Address" class="form-control" autofocus required />
+								<label>Rua/Avenida</label>
+								<input type="text" asp-for="Address" class="form-control" autofocus />
 								<span asp-validation-for="Address" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label>Número *</label>
-								<input type="text" asp-for="Number" class="form-control" autofocus required />
+								<label>Número</label>
+								<input type="text" asp-for="Number" class="form-control" autofocus />
 								<span asp-validation-for="Number" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
@@ -99,15 +105,15 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Cidade *</label>
-								<input type="text" asp-for="City" class="form-control" autofocus required />
+								<label>Cidade</label>
+								<input type="text" asp-for="City" class="form-control" autofocus />
 								<span asp-validation-for="City" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label>Estado *</label>
-								<input type="text" asp-for="State" class="form-control" autofocus maxlength="2" required />
+								<label>Estado</label>
+								<input type="text" asp-for="State" class="form-control" autofocus maxlength="2" />
 								<span asp-validation-for="State" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>

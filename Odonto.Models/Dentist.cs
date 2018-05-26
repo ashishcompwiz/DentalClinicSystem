@@ -9,5 +9,10 @@ namespace Odonto.Models
         public string Specialty { get; set; }
 
         public string CRO { get; set; }
+
+        public Person GetBase()
+        {
+            return (Person)this;
+        }
     }
 }

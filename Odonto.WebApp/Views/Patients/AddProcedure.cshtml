@@ -18,7 +18,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Dentista *</label>
-								<select asp-for="DentistID" class="form-control col-md-6" required>
+								<select asp-for="DentistID" class="form-control col-md-6" autofocus required>
 									<option value="">Selecione o dentista</option>;
 									@foreach (var item in ViewBag.Dentists)
 									{
@@ -31,7 +31,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Procedimento *</label>
-								<select class="form-control col-md-6" required asp-for="ProcedureID" onchange="setProcedureValue(this.value)">
+								<select class="form-control col-md-6" required asp-for="ProcedureID" autofocus onchange="setProcedureValue(this.value)">
 									<option value="">Selecione um procedimento</option>;
 									@foreach (var item in ViewBag.Procedures)
 									{
@@ -44,20 +44,20 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Descrição</label>
-								<textarea class="form-control" asp-for="Description" rows="6"></textarea>
+								<textarea class="form-control" autofocus asp-for="Description" rows="6"></textarea>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Data *</label>
-								<input class="form-control col-md-3 col-sm-6" type="date" asp-for="Date" required />
+								<input class="form-control col-md-3 col-sm-6" autofocus type="date" asp-for="Date" required />
 								<span asp-validation-for="Date" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Valor *</label>
-								<input class="form-control col-md-3 col-sm-6" type="text" asp-for="Value" required />
+								<input class="form-control col-md-3 col-sm-6" autofocus type="text" asp-for="Value" required />
 								<span asp-validation-for="Value" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>

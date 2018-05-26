@@ -42,9 +42,9 @@
 				<ul class="navbar-nav mr-auto mt-md-0">
 					<li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
 					<li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-					<li class="nav-item dropdown mega-dropdown">
+					@*<li class="nav-item dropdown mega-dropdown">
 						<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i></a>
-					</li>
+					</li>*@
 				</ul>
 				<ul class="navbar-nav my-lg-0">
 					<li class="nav-item hidden-sm-down search-box">
@@ -65,14 +65,12 @@
 								</li>
 								<li>
 									<div class="message-center">
-										<!-- Message -->
 										<a href="#">
 											<div class="user-img"> <img src="images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
 											<div class="mail-contnet">
 												<h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
 											</div>
 										</a>
-										<!-- Message -->
 										<a href="#">
 											<div class="user-img"> <img src="images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
 											<div class="mail-contnet">
@@ -86,7 +84,6 @@
 												<h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
 											</div>
 										</a>
-										<!-- Message -->
 										<a href="#">
 											<div class="user-img"> <img src="images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
 											<div class="mail-contnet">
@@ -101,13 +98,10 @@
 							</ul>
 						</div>
 					</li>
-					<!-- End Messages -->
-					<!-- Profile -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> @HttpContextAccessor.HttpContext.Session.GetString("userName")</a>
 						<div class="dropdown-menu dropdown-menu-right animated zoomIn">
 							<ul class="dropdown-user">
-								@*<li><a href="/"><i class="ti-user"></i> Perfil</a></li>*@	
 								<li><a asp-action="Logout" asp-controller="Login"><i class="fa fa-power-off"></i> Sair</a></li>
 							</ul>
 						</div>
@@ -124,7 +118,7 @@
 					<li class="nav-devider"></li>
 					<li class="nav-label">Home</li>
 					<li>
-						<a class="" href="@Url.Action("List","Patients")" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a>
+						<a class="" href="@Url.Action("Index","Dashboard")" aria-expanded="false"><i class="fa fa-hashtag"></i><span class="hide-menu">Dashboard</span></a>
 					</li>
 					<li class="nav-label">Cadastros</li>
 					<li>
@@ -147,7 +141,6 @@
 	</div>
 
 	<div class="page-wrapper">
-		<!-- Bread crumb -->
 		<div class="row page-titles">
 			<div class="col-md-5 align-self-center">
 				<h3 class="text-primary">@ViewData["Section"]</h3>
@@ -162,10 +155,7 @@
 		<div class="container-fluid">
 			@RenderBody()
 		</div>
-		<footer class="footer"> @*© 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a>*@</footer>
 	</div>
-
-	
 	<script src="~/js/lib/jquery/jquery.min.js"></script>
 	<script src="~/js/lib/bootstrap/js/popper.min.js"></script>
 	<script src="~/js/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -173,11 +163,6 @@
 	<script src="~/js/sidebarmenu.js"></script>
 	<script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
 	<script src="~/js/custom.min.js"></script>
-	<script>
-		$(document).scroll(function () {
-			console.log($(document).scrollTop());
-		})
-	</script>
 </body>
 
 </html>

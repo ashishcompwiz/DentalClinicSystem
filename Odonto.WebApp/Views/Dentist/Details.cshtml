@@ -1,0 +1,79 @@
+﻿@model Odonto.Models.Dentist
+@{
+	ViewData["Title"] = "Detalhes do Dentista";
+}
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<div class="show-record">
+				<h2 class="m-t-5">
+					@Model.Name @Model.LastName
+					<a asp-action="Edit" asp-route-id="@Model.ID" class="pull-right btn btn-outline-warning"><i class="fa fa-pencil"></i> Editar</a>
+				</h2>
+				<hr>
+				<div class="row m-t-20">
+					<div class="col-md-4">
+						<dl>
+							<dt>CPF</dt>
+							<dd>@Model.CPF</dd>
+						</dl>
+					</div>
+					<div class="col-md-4">
+						<dl>
+							<dt>Data de Nascimento</dt>
+							<dd>@Model.BirthDate.ToShortDateString()</dd>
+						</dl>
+					</div>
+					<div class="col-md-4">
+						<dl>
+							<dt>Sexo</dt>
+							<dd>@Model.SexString</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<dl>
+							<dt>CRO</dt>
+							<dd>@Model.CRO</dd>
+						</dl>
+					</div>
+					<div class="col-md-4">
+						<dl>
+							<dt>Especialidade</dt>
+							<dd>@Model.Specialty</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<dl>
+							<dt>Telefone</dt>
+							<dd>@Model.Phone</dd>
+						</dl>
+					</div>
+					@if (!string.IsNullOrEmpty(Model.Phone2))
+					{
+						<div class="col-md-4">
+							<dl>
+								<dt>Telefone 2</dt>
+								<dd>@Model.Phone2</dd>
+							</dl>
+						</div>
+					}
+				</div>
+				@if (!string.IsNullOrEmpty(Model.Address))
+				{
+					<div class="row">
+						<div class="col-md-12">
+							<dl>
+								<dt>Endereço</dt>
+								<dd>@Model.AddressString</dd>
+							</dl>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

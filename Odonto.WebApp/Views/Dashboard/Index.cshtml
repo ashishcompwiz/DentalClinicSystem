@@ -1,7 +1,58 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<h2>Index</h2>
-
+<div class="row">
+	<div class="col-md-3">
+		<div class="card p-30">
+			<div class="media">
+				<div class="media-left meida media-middle">
+					<span><i class="fa fa-users f-s-40 color-primary"></i></span>
+				</div>
+				<div class="media-body media-text-right">
+					<h2>@ViewBag.Patients</h2>
+					<p class="m-b-0">Pacientes</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card p-30">
+			<div class="media">
+				<div class="media-left meida media-middle">
+					<span><i class="fa fa-user-md f-s-40 color-success"></i></span>
+				</div>
+				<div class="media-body media-text-right">
+					<h2>@ViewBag.Dentists</h2>
+					<p class="m-b-0">Dentistas</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card p-30">
+			<div class="media">
+				<div class="media-left meida media-middle">
+					<span><i class="fa fa-usd f-s-40 color-warning"></i></span>
+				</div>
+				<div class="media-body media-text-right">
+					<h2>10</h2>
+					<p class="m-b-0">Atendimentos no mês</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card p-30">
+			<div class="media">
+				<div class="media-left meida media-middle">
+					<span><i class="fa fa-calendar-check-o f-s-40 color-danger"></i></span>
+				</div>
+				<div class="media-body media-text-right">
+					<h2>25</h2>
+					<p class="m-b-0">Agendamentos</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

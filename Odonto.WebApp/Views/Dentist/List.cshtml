@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Odonto.Models.Dentist>
+@{
+	ViewData["Title"] = "Listar Dentistas";
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Dentistas</h4>
+			<div class="table-responsive m-t-20">
+				<table id="myTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th width="20%" class="text-center hidden-sm-down">CRO</th>
+							<th>Nome</th>
+							<th width="10%" class="text-center">Especialidade</th>
+							<th width="12%" class="text-center hidden-sm-down">Telefone</th>
+							<th width="10%" class="text-center"></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td class="text-center hidden-sm-down">@item.CRO</td>
+								<td><a title="Clique para ver o dentista" href="@Url.Action("Details", "Dentist", new { id = item.ID })">@item.Name @item.LastName</a></td>
+								<td class="text-center">@item.Specialty</td>
+								<td class="text-center hidden-sm-down">@item.Phone</td>
+								<td class="text-center">
+									<a title="Editar" class="text-warning" asp-action="Edit" asp-controller="Dentist" asp-route-id="@item.ID"><i class="fa fa-pencil fa-lg"></i></a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

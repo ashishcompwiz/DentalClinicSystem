@@ -10,7 +10,8 @@ namespace Odonto.DAO
     {
         private string strConnection;
 
-        public DentistsDAO(string strConn){
+        public DentistsDAO(string strConn)
+        {
             strConnection = strConn;
         }
 
@@ -38,47 +39,70 @@ namespace Odonto.DAO
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                return sql.QueryFirstOrDefault<Dentist>("SELECT * FROM Dentists WHERE ID = @ID", new { ID = ID });
+                return sql.QueryFirstOrDefault<Dentist>("SELECT * FROM Dentists LEFT JOIN Persons ON Dentists.ID = Persons.ID WHERE Dentists.ID = @ID", new { ID = ID });
             }
         }
 
-        public bool Add(Dentist Dentist)
+        public int Add(Dentist Dentist)
         {
+            try
+            {
+                PersonsDAO PersonsDAO = new PersonsDAO(strConnection);
+                Dentist.CreatedOn = DateTime.Now;
+                Dentist.UpdatedOn = DateTime.Now;
+
+                Person person = Dentist.GetBase();
+                int insertedId = PersonsDAO.Add(person);
+                Dentist.ID = insertedId;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
             using (var sql = new SqlConnection(strConnection))
             {
-                var resp = sql.Execute(@"INSERT INTO Dentists (Specialty,CRO)
-                                        VALUES (@Specialty,@CRO)",
+                var resp = sql.Execute(@"INSERT INTO Dentists (ID,Specialty,CRO)
+                                        VALUES (@ID,@Specialty,@CRO)",
                                         new
                                         {
+                                            ID = Dentist.ID,
                                             Specialty = Dentist.Specialty,
-CRO = Dentist.CRO
+                                            CRO = Dentist.CRO
                                         });
-                return Convert.ToBoolean(resp);
+                return Dentist.ID;
             }
         }
 
         public bool Edit(Dentist Dentist)
         {
+            PersonsDAO PersonsDAO = new PersonsDAO(strConnection);
             Dentist.UpdatedOn = DateTime.Now;
-
-            using (var sql = new SqlConnection(strConnection))
+            Person person = Dentist.GetBase();
+            if (PersonsDAO.Edit(person))
             {
-                var resp = sql.Execute(@"UPDATE Dentists SET Specialty = @Specialty,CRO = @CRO
+                using (var sql = new SqlConnection(strConnection))
+                {
+                    var resp = sql.Execute(@"UPDATE Dentists SET Specialty = @Specialty,CRO = @CRO
                                             WHERE ID=@ID",
-                                        new
-                                        {
-                                            Specialty = Dentist.Specialty,
-CRO = Dentist.CRO
-                                        });
-                return Convert.ToBoolean(resp);
+                                            new
+                                            {
+                                                ID = Dentist.ID,
+                                                Specialty = Dentist.Specialty,
+                                                CRO = Dentist.CRO
+                                            });
+                    return Convert.ToBoolean(resp);
+                }
             }
+
+            return false;
         }
 
         public bool Remove(string ID)
         {
             using (var sql = new SqlConnection(strConnection))
             {
-                var resp = sql.Execute("DELETE FROM Dentists WHERE ID = @ID", new { ID = ID });
+                sql.Execute("DELETE FROM Dentists WHERE ID = @ID", new { ID = ID });
+                var resp = sql.Execute("DELETE FROM Persons WHERE ID = @ID", new { ID = ID });
 
                 return Convert.ToBoolean(resp);
             }

@@ -74,9 +74,13 @@ tbody tr td a {
 	font-weight: bold;
 }
 
-a, button {
+a {
 	color: #585858;
 }
+
+	a:hover, a:focus {
+		color: #004488;
+	}
 
 .btn-success {
 	background: #299a5c;
@@ -150,11 +154,6 @@ textarea.form-control {
 	top: 0 !important;
 }
 
-}
-
-.heaaad {
-	position: relative;
-	z-index: 50;
-	background: #fff;
-	box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1);
+.form-control:hover, .form-control:focus {
+	border-color: #004488 !important;
 }
