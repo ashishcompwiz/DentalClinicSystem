@@ -1,22 +1,38 @@
-﻿@model ErrorViewModel
-@{
-    ViewData["Title"] = "Error";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+	<title>Erro - Odonto Sistema de Gestão</title>
+	
+	<link href="~/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="~/css/helper.css" rel="stylesheet">
+	<link href="~/css/style.css" rel="stylesheet">
+</head>
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
-
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>Development environment should not be enabled in deployed applications</strong>, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>, and restarting the application.
-</p>
+<body class="fix-header fix-sidebar">
+	<div class="error-page" id="wrapper">
+		<div class="error-box">
+			<div class="error-body text-center">
+				<h1>Erro</h1>
+				<h3 class="text-uppercase">Ocorreu um erro interno do servidor</h3>
+				<p class="text-muted m-t-30 m-b-30">Por favor, contate o seu desevolvedor</p>
+				<a class="btn btn-info btn-rounded waves-effect waves-light m-b-40" asp-controller="Dashboard" asp-action="Index">Ir para o Dashboard</a>
+			</div>
+		</div>
+	</div>
+	
+	<script src="js/lib/jquery/jquery.min.js"></script>
+	<script src="js/lib/bootstrap/js/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/jquery.slimscroll.js"></script>
+	<script src="js/sidebarmenu.js"></script>
+	<script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+	<script src="js/custom.min.js"></script>
+</body>
+</html>
