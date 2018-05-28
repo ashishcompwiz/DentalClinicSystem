@@ -1,8 +1,8 @@
 ﻿using Dapper;
+using Npgsql;
 using Odonto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Odonto.DAO
 {
@@ -17,7 +17,7 @@ namespace Odonto.DAO
 
         public List<Disease> GetAll(int clinicId)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Disease>("SELECT ID, Name FROM Diseases WHERE ClinicId = @clinicId ORDER BY Name", new { clinicId }).AsList();
                 return list;
@@ -26,7 +26,7 @@ namespace Odonto.DAO
 
         public Disease GetById(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<Disease>("SELECT * FROM Diseases WHERE ID = @ID", new { ID = ID });
             }
@@ -34,7 +34,7 @@ namespace Odonto.DAO
 
         public bool Add(Disease Disease)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"INSERT INTO Diseases (ID,ClinicID,Name)
                                         VALUES (@ID,@ClinicID,@Name)",
@@ -49,7 +49,7 @@ namespace Odonto.DAO
 
         public bool Edit(Disease Disease)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"UPDATE Diseases SET ClinicID = @ClinicID,Name = @Name
                                             WHERE ID=@ID",
@@ -65,7 +65,7 @@ namespace Odonto.DAO
 
         public bool Remove(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute("DELETE FROM Diseases WHERE ID = @ID", new { ID = ID });
 
@@ -75,7 +75,7 @@ namespace Odonto.DAO
 
         public int Length()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM Diseases");
             }

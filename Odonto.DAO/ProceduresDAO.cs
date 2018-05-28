@@ -1,8 +1,8 @@
 using Dapper;
+using Npgsql;
 using Odonto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Odonto.DAO
 {
@@ -17,7 +17,7 @@ namespace Odonto.DAO
 
         public List<Procedure> GetAll(int clinicId)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Procedure>("SELECT * FROM Procedures WHERE ClinicId = @clinicId ORDER BY Name", new { clinicId }).AsList();
                 return list;
@@ -28,7 +28,7 @@ namespace Odonto.DAO
         {
             int IndexStart = (Page * Size) - Size;
             int IndexEnd = Page * Size;
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Procedure>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Procedures) As Procedures WHERE Procedures.RowIndex > " + IndexStart + " AND Procedures.RowIndex <= " + IndexEnd).AsList();
                 return list;
@@ -37,7 +37,7 @@ namespace Odonto.DAO
 
         public Procedure GetById(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<Procedure>("SELECT * FROM Procedures WHERE ID = @ID", new { ID = ID });
             }
@@ -45,7 +45,7 @@ namespace Odonto.DAO
 
         public decimal GetValue(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<decimal>("SELECT Value FROM Procedures WHERE ID = @ID", new { ID = ID });
             }
@@ -53,7 +53,7 @@ namespace Odonto.DAO
 
         public bool Add(Procedure Procedure)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"INSERT INTO Procedures (ClinicID,Name,Description,Observation,Value)
                                         VALUES (@ClinicID,@Name,@Description,@Observation,@Value)",
@@ -72,7 +72,7 @@ namespace Odonto.DAO
         public bool Edit(Procedure Procedure)
         {
 
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"UPDATE Procedures SET ClinicID = @ClinicID,Name = @Name,Description = @Description,Observation = @Observation,Value = @Value
                                             WHERE ID=@ID",
@@ -90,7 +90,7 @@ namespace Odonto.DAO
 
         public bool Remove(string ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute("DELETE FROM Procedures WHERE ID = @ID", new { ID = ID });
 
@@ -100,7 +100,7 @@ namespace Odonto.DAO
 
         public int Length()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM Procedures");
             }

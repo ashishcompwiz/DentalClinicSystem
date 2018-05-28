@@ -1,8 +1,8 @@
 using Dapper;
+using Npgsql;
 using Odonto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Odonto.DAO
 {
@@ -16,7 +16,7 @@ namespace Odonto.DAO
 
         public List<User> GetAll()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<User>("SELECT * FROM Users").AsList();
                 return list;
@@ -27,7 +27,7 @@ namespace Odonto.DAO
         {
             int IndexStart = (Page * Size) - Size;
             int IndexEnd = Page * Size;
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<User>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Users) As Users WHERE Users.RowIndex > " + IndexStart + " AND Users.RowIndex <= " + IndexEnd).AsList();
                 return list;
@@ -36,7 +36,7 @@ namespace Odonto.DAO
 
         public User GetById(string ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<User>("SELECT * FROM Users WHERE ID = @ID", new { ID });
             }
@@ -44,15 +44,15 @@ namespace Odonto.DAO
 
         public User GetByEmail(string email)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
-                return sql.QueryFirstOrDefault<User>("SELECT TOP(1) * FROM Users WHERE Email = @email", new { email });
+                return sql.QueryFirstOrDefault<User>("SELECT * FROM Users WHERE Email = @email", new { email });
             }
         }
 
         public bool Add(User User)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"INSERT INTO Users (ID,Active,Email,Password,Type)
                                         VALUES (@ID,@Active,@Email,@Password,@Type)",
@@ -70,7 +70,7 @@ namespace Odonto.DAO
 
         public bool Edit(User User)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"UPDATE Users SET Active = @Active, Email = @Email, Password = @Password, Type = @Type
                                             WHERE ID=@ID",
@@ -87,7 +87,7 @@ namespace Odonto.DAO
 
         public bool Remove(string ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute("DELETE FROM Users WHERE ID = @ID", new { ID = ID });
 
@@ -97,7 +97,7 @@ namespace Odonto.DAO
 
         public int Length()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM Users");
             }

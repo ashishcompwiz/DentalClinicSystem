@@ -1,8 +1,8 @@
 using Dapper;
+using Npgsql;
 using Odonto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Odonto.DAO
 {
@@ -17,7 +17,7 @@ namespace Odonto.DAO
 
         public List<PatientRecord> GetAll()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<PatientRecord>("SELECT * FROM PatientsRecord").AsList();
                 return list;
@@ -28,7 +28,7 @@ namespace Odonto.DAO
         {
             int IndexStart = (Page * Size) - Size;
             int IndexEnd = Page * Size;
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<PatientRecord>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM PatientsRecord) As PatientsRecord WHERE PatientsRecord.RowIndex > " + IndexStart + " AND PatientsRecord.RowIndex <= " + IndexEnd).AsList();
                 return list;
@@ -37,7 +37,7 @@ namespace Odonto.DAO
 
         public PatientRecord GetById(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<PatientRecord>("SELECT * FROM PatientsRecord WHERE PatientID = @ID", new { ID = ID });
             }
@@ -45,7 +45,7 @@ namespace Odonto.DAO
 
         public List<PatientRecordDisease> GetDiseases(int patientId)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<PatientRecordDisease>(@"SELECT Record.ID, Record.PatientRecordID, Record.DiseaseID, Record.Description, Diseases.Name As DiseaseLabel FROM PatientsRecordDisease As Record 
                                                             LEFT JOIN Diseases ON Record.DiseaseID = Diseases.ID WHERE PatientRecordID = @PatientRecordID", 
@@ -56,7 +56,7 @@ namespace Odonto.DAO
 
         public List<PatientRecordProcedure> GetProcedures(int patientId)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<PatientRecordProcedure>(@"SELECT Persons.Name + ' ' + Persons.LastName As DentistName, Record.ID, Record.Description, PatientRecordID, DentistID, ProcedureID, Date, Record.Value, Procedures.Name As ProcedureLabel
                                                                 FROM PatientsRecordProcedure As Record LEFT JOIN Procedures ON Record.ProcedureID = Procedures.ID
@@ -73,7 +73,7 @@ namespace Odonto.DAO
             PatientRecord.CreatedOn = DateTime.Now;
             PatientRecord.UpdatedOn = DateTime.Now;
 
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"INSERT INTO PatientsRecord (PatientID,MainComplaint,Alterations,Medicines,PsychologicalTreatment,Diagnose,CreatedOn,UpdatedOn,CreatedBy,UpdatedBy)
                                         VALUES (@PatientID,@MainComplaint,@Alterations,@Medicines,@PsychologicalTreatment,@Diagnose,@CreatedOn,@UpdatedOn,@CreatedBy,@UpdatedBy)",
@@ -96,7 +96,7 @@ namespace Odonto.DAO
 
         public bool AddDiseases(List<PatientRecordDisease> PatientDiseases)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 foreach(var item in PatientDiseases)
                 {
@@ -115,7 +115,7 @@ namespace Odonto.DAO
 
         public bool AddProcedure(PatientRecordProcedure PatientProcedure)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 sql.Execute(@"INSERT INTO PatientsRecordProcedure (PatientRecordID,ProcedureID,DentistID,Description,Value,Date)
                             VALUES (@PatientRecordID,@ProcedureID,@DentistID,@Description,@Value,@Date)",
@@ -136,7 +136,7 @@ namespace Odonto.DAO
         {
             PatientRecord.UpdatedOn = DateTime.Now;
 
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"UPDATE PatientsRecord SET MainComplaint = @MainComplaint,Alterations = @Alterations,Medicines = @Medicines,PsychologicalTreatment = @PsychologicalTreatment,Diagnose = @Diagnose,UpdatedOn = @UpdatedOn,UpdatedBy = @UpdatedBy
                                             WHERE PatientID=@PatientID",
@@ -157,7 +157,7 @@ namespace Odonto.DAO
 
         public bool Remove(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute("DELETE FROM PatientsRecord WHERE PatientID = @ID", new { ID });
 
@@ -167,7 +167,7 @@ namespace Odonto.DAO
 
         public int Length()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM PatientsRecord");
             }

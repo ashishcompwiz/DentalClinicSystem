@@ -1,8 +1,8 @@
 using Dapper;
+using Npgsql;
 using Odonto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Odonto.DAO
 {
@@ -17,7 +17,7 @@ namespace Odonto.DAO
 
         public List<Dentist> GetAll(int clinicId)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Dentist>("SELECT * FROM Dentists LEFT JOIN Persons ON Dentists.ID = Persons.ID WHERE Persons.ClinicID = @ClinicID ORDER BY Name", new { ClinicID = clinicId }).AsList();
                 return list;
@@ -28,7 +28,7 @@ namespace Odonto.DAO
         {
             int IndexStart = (Page * Size) - Size;
             int IndexEnd = Page * Size;
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Dentist>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Dentists) As Dentists WHERE Dentists.RowIndex > " + IndexStart + " AND Dentists.RowIndex <= " + IndexEnd).AsList();
                 return list;
@@ -37,7 +37,7 @@ namespace Odonto.DAO
 
         public Dentist GetById(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<Dentist>("SELECT * FROM Dentists LEFT JOIN Persons ON Dentists.ID = Persons.ID WHERE Dentists.ID = @ID", new { ID = ID });
             }
@@ -59,7 +59,7 @@ namespace Odonto.DAO
             {
                 return 0;
             }
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"INSERT INTO Dentists (ID,Specialty,CRO)
                                         VALUES (@ID,@Specialty,@CRO)",
@@ -80,7 +80,7 @@ namespace Odonto.DAO
             Person person = Dentist.GetBase();
             if (PersonsDAO.Edit(person))
             {
-                using (var sql = new SqlConnection(strConnection))
+                using (var sql = new NpgsqlConnection(strConnection))
                 {
                     var resp = sql.Execute(@"UPDATE Dentists SET Specialty = @Specialty,CRO = @CRO
                                             WHERE ID=@ID",
@@ -99,7 +99,7 @@ namespace Odonto.DAO
 
         public bool Remove(string ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 sql.Execute("DELETE FROM Dentists WHERE ID = @ID", new { ID = ID });
                 var resp = sql.Execute("DELETE FROM Persons WHERE ID = @ID", new { ID = ID });
@@ -110,7 +110,7 @@ namespace Odonto.DAO
 
         public int Length()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM Dentists");
             }

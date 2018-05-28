@@ -1,8 +1,8 @@
 using Dapper;
+using Npgsql;
 using Odonto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Odonto.DAO
 {
@@ -16,7 +16,7 @@ namespace Odonto.DAO
 
         public List<Administrator> GetAll()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Administrator>("SELECT * FROM Administrators ORDER BY ID DESC").AsList();
                 return list;
@@ -27,7 +27,7 @@ namespace Odonto.DAO
         {
             int IndexStart = (Page * Size) - Size;
             int IndexEnd = Page * Size;
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Administrator>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Administrators) As Administrators WHERE Administrators.RowIndex > " + IndexStart + " AND Administrators.RowIndex <= " + IndexEnd).AsList();
                 return list;
@@ -36,7 +36,7 @@ namespace Odonto.DAO
 
         public Administrator Get(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<Administrator>("SELECT * FROM Administrators WHERE ID = @ID", new { ID = ID });
             }
@@ -44,7 +44,7 @@ namespace Odonto.DAO
 
         public bool Add(Administrator Administrator)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"INSERT INTO Administrators (Position)
                                         VALUES (@Position)",
@@ -60,7 +60,7 @@ namespace Odonto.DAO
         {
             Administrator.UpdatedOn = DateTime.Now;
 
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"UPDATE Administrators SET Position = @Position
                                             WHERE ID=@ID",
@@ -74,7 +74,7 @@ namespace Odonto.DAO
 
         public bool Remove(string ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute("DELETE FROM Administrators WHERE ID = @ID", new { ID = ID });
 
@@ -84,7 +84,7 @@ namespace Odonto.DAO
 
         public int Length()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM Administrators");
             }

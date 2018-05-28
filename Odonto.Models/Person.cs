@@ -71,7 +71,13 @@ namespace Odonto.Models
         public string AddressString
         {
             get {
-                return Address + ", " + Number + " - " + City + "/" + State;
+                string resp = string.Empty;
+                resp += !string.IsNullOrEmpty(Address) ? Address : string.Empty;
+                resp += !string.IsNullOrEmpty(Number) ? ", " + Number : string.Empty;
+                resp += !string.IsNullOrEmpty(City) ? " - " + City : string.Empty;
+                resp += !string.IsNullOrEmpty(State) ? "/" + State : string.Empty;
+
+                return resp;
             }
         }
     }

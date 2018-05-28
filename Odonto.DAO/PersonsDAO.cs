@@ -1,8 +1,8 @@
 ﻿using Dapper;
+using Npgsql;
 using Odonto.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace Odonto.DAO
 {
@@ -17,7 +17,7 @@ namespace Odonto.DAO
 
         public List<Person> GetAll()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Person>("SELECT * FROM Persons ORDER BY ID DESC").AsList();
                 return list;
@@ -28,7 +28,7 @@ namespace Odonto.DAO
         {
             int IndexStart = (Page * Size) - Size;
             int IndexEnd = Page * Size;
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var list = sql.Query<Person>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Persons) As Persons WHERE Persons.RowIndex > " + IndexStart + " AND Persons.RowIndex <= " + IndexEnd).AsList();
                 return list;
@@ -37,7 +37,7 @@ namespace Odonto.DAO
 
         public Person GetById(int ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<Person>("SELECT * FROM Persons WHERE ID = @ID", new { ID = ID });
             }
@@ -45,7 +45,7 @@ namespace Odonto.DAO
 
         public int Add(Person Person)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.ExecuteScalar<int>(@"INSERT INTO Persons (ClinicID,CPF,Name,LastName,Sex,CEP,Address,Number,City,State,Phone,Phone2,BirthDate,CreatedOn,UpdatedOn,CreatedBy,UpdatedBy)
                                     OUTPUT INSERTED.ID
@@ -78,7 +78,7 @@ namespace Odonto.DAO
         {
             Person.UpdatedOn = DateTime.Now;
 
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute(@"UPDATE Persons SET ClinicID = @ClinicID,CPF = @CPF,Name = @Name,LastName = @LastName,Sex = @Sex,CEP = @CEP,Address = @Address,Number = @Number,City = @City,State = @State,Phone = @Phone,Phone2 = @Phone2,BirthDate = @BirthDate,UpdatedOn = @UpdatedOn,UpdatedBy = @UpdatedBy
                                         WHERE ID=@ID",
@@ -107,7 +107,7 @@ namespace Odonto.DAO
 
         public bool Remove(string ID)
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 var resp = sql.Execute("DELETE FROM Persons WHERE ID = @ID", new { ID = ID });
 
@@ -117,7 +117,7 @@ namespace Odonto.DAO
 
         public int Length()
         {
-            using (var sql = new SqlConnection(strConnection))
+            using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM Persons");
             }
