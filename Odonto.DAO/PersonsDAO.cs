@@ -43,19 +43,28 @@ namespace Odonto.DAO
             }
         }
 
+        /// <summary>
+        /// Insert a person in Persons table
+        /// </summary>
+        /// <param name="Person"></param>
+        /// <returns>If grater than 0 is the inserted id, if 0 is error, if less than 0 is repeated CPF</returns>
         public int Add(Person Person)
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var resp = sql.ExecuteScalar<int>(@"INSERT INTO Persons (ClinicID,CPF,Name,LastName,Sex,CEP,Address,Number,City,State,Phone,Phone2,BirthDate,CreatedOn,UpdatedOn,CreatedBy,UpdatedBy)
-                                    OUTPUT INSERTED.ID
-                                    VALUES (@ClinicID,@CPF,@Name,@LastName,@Sex,@CEP,@Address,@Number,@City,@State,@Phone,@Phone2,@BirthDate,@CreatedOn,@UpdatedOn,@CreatedBy,@UpdatedBy)",
+                var repeatedCPF = sql.ExecuteScalar<int>("SELECT ID FROM Persons WHERE CPF = @CPF;", new { CPF = Person.CPF });
+                if (repeatedCPF > 0)
+                    return -1;
+
+                var resp = sql.ExecuteScalar<int>(@"
+                                    INSERT INTO Persons (ClinicID,CPF,Name,Sex,CEP,Address,Number,City,State,Phone,Phone2,BirthDate,CreatedOn,UpdatedOn,CreatedBy,UpdatedBy)
+                                    VALUES (@ClinicID,@CPF,@Name,@Sex,@CEP,@Address,@Number,@City,@State,@Phone,@Phone2,@BirthDate,@CreatedOn,@UpdatedOn,@CreatedBy,@UpdatedBy);
+                                    SELECT ID FROM Persons WHERE CPF = @CPF;",
                                         new
                                         {
                                             ClinicID = Person.ClinicID,
                                             CPF = Person.CPF,
                                             Name = Person.Name,
-                                            LastName = Person.LastName,
                                             Sex = Person.Sex,
                                             CEP = Person.CEP,
                                             Address = Person.Address,
@@ -80,7 +89,7 @@ namespace Odonto.DAO
 
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var resp = sql.Execute(@"UPDATE Persons SET ClinicID = @ClinicID,CPF = @CPF,Name = @Name,LastName = @LastName,Sex = @Sex,CEP = @CEP,Address = @Address,Number = @Number,City = @City,State = @State,Phone = @Phone,Phone2 = @Phone2,BirthDate = @BirthDate,UpdatedOn = @UpdatedOn,UpdatedBy = @UpdatedBy
+                var resp = sql.Execute(@"UPDATE Persons SET ClinicID = @ClinicID,CPF = @CPF,Name = @Name,Sex = @Sex,CEP = @CEP,Address = @Address,Number = @Number,City = @City,State = @State,Phone = @Phone,Phone2 = @Phone2,BirthDate = @BirthDate,UpdatedOn = @UpdatedOn,UpdatedBy = @UpdatedBy
                                         WHERE ID=@ID",
                                         new
                                         {
@@ -88,7 +97,6 @@ namespace Odonto.DAO
                                             ClinicID = Person.ClinicID,
                                             CPF = Person.CPF,
                                             Name = Person.Name,
-                                            LastName = Person.LastName,
                                             Sex = Person.Sex,
                                             CEP = Person.CEP,
                                             Address = Person.Address,

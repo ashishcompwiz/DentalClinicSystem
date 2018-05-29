@@ -8,6 +8,10 @@
 		{
 			<div class="card-header">Preencha todos os campos obrigatórios</div>
 		}
+		else if (!string.IsNullOrEmpty(ViewBag.Error))
+		{
+			<div class="card-header">@ViewBag.Error</div>
+		}
 		<div class="card-body">
 			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
 				<input type="hidden" asp-for="ID" />
@@ -15,18 +19,11 @@
 					<h3 class="m-t-5">Informações Pessoais</h3>
 					<hr>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Nome *</label>
 								<input type="text" asp-for="Name" class="form-control" autofocus required />
 								<span asp-validation-for="Name" class="form-control-feedback text-danger"></span>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group has-info">
-								<label class="control-label">Sobrenome *</label>
-								<input type="text" asp-for="LastName" class="form-control" autofocus required />
-								<span asp-validation-for="LastName" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 					</div>

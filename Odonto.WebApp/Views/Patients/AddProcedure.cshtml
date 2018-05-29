@@ -22,7 +22,7 @@
 									<option value="">Selecione o dentista</option>;
 									@foreach (var item in ViewBag.Dentists)
 									{
-									<option value="@item.ID">@item.Name @item.LastName (@item.Specialty)</option>;
+									<option value="@item.ID">@item.Name (@item.Specialty)</option>;
 									}
 								</select>
 								<span asp-validation-for="DentistID" class="form-control-feedback text-danger"></span>

@@ -38,7 +38,6 @@ namespace Odonto.WebApp.Controllers
                 HttpContext.Session.SetString("userEmail", user.Email);
                 HttpContext.Session.SetString("userType", user.Type);
                 HttpContext.Session.SetString("userName", person.Name);
-                HttpContext.Session.SetString("userLastName", person.LastName);
                 HttpContext.Session.SetInt32("clinicId", person.ClinicID);
                 return RedirectToAction("Index", "Dashboard");
             }

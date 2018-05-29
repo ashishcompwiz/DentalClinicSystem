@@ -66,6 +66,8 @@ namespace Odonto.DAO
 
                 Person person = Patient.GetBase();
                 int insertedId = PersonsDAO.Add(person);
+                if (insertedId <= 0)
+                    return insertedId;
                 Patient.ID = insertedId;
             }
             catch (Exception e)

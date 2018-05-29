@@ -90,6 +90,13 @@ namespace Odonto.WebApp.Controllers
             Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
             Model.CreatedBy = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
             int id = PatientsDAO.Add(Model);
+            if (id < 0)
+            {
+                ViewData["Section"] = "Pacientes";
+                ViewData["Action"] = "Criar Novo";
+                ViewData["Error"] = "O CPF informado já foi cadastrado";
+                return View(Model);
+            }
 
             return RedirectToAction("Records", new { id });
         }
@@ -142,7 +149,7 @@ namespace Odonto.WebApp.Controllers
             ViewData["Action"] = "Criar Novo Procedimento";
             ViewBag.Procedures = ProceduresDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
             ViewBag.Dentists = DentistsDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
-            ViewBag.PatientName = patient.Name + " " + patient.LastName;
+            ViewBag.PatientName = patient.Name;
 
             return View(procedure);
         }
@@ -158,7 +165,7 @@ namespace Odonto.WebApp.Controllers
                 ViewData["Action"] = "Criar Novo Procedimento";
                 ViewBag.Procedures = ProceduresDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
                 ViewBag.Dentists = DentistsDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
-                ViewBag.PatientName = patient.Name + " " + patient.LastName;
+                ViewBag.PatientName = patient.Name;
 
                 return View(Model);
             }
@@ -187,7 +194,7 @@ namespace Odonto.WebApp.Controllers
 
             ViewData["Section"] = "Pacientes";
             ViewData["Action"] = "Criar Anamnese";
-            ViewBag.PatientName = patient.Name + " " + patient.LastName;
+            ViewBag.PatientName = patient.Name;
             ViewBag.Diseases = DiseasesDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));
 
             return View(anamnese);

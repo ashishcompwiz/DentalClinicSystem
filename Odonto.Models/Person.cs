@@ -20,9 +20,6 @@ namespace Odonto.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Este campo é obrigatório")]
-        public string LastName { get; set; }
-
-        [Required(ErrorMessage = "Este campo é obrigatório")]
         public char Sex { get; set; }
 
         public string CEP { get; set; }

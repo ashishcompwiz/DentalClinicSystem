@@ -58,7 +58,7 @@ namespace Odonto.DAO
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var list = sql.Query<PatientRecordProcedure>(@"SELECT Persons.Name + ' ' + Persons.LastName As DentistName, Record.ID, Record.Description, PatientRecordID, DentistID, ProcedureID, Date, Record.Value, Procedures.Name As ProcedureLabel
+                var list = sql.Query<PatientRecordProcedure>(@"SELECT Persons.Name As DentistName, Record.ID, Record.Description, PatientRecordID, DentistID, ProcedureID, Date, Record.Value, Procedures.Name As ProcedureLabel
                                                                 FROM PatientsRecordProcedure As Record LEFT JOIN Procedures ON Record.ProcedureID = Procedures.ID
                                                                 LEFT JOIN Persons ON Record.DentistID = Persons.ID
                                                                 WHERE PatientRecordID = @PatientRecordID
