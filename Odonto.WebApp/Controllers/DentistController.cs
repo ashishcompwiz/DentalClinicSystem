@@ -49,8 +49,11 @@ namespace Odonto.WebApp.Controllers
             Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
             int dentistId = DentistsDAO.Add(Model);
 
-            if (dentistId == 0)
+            if (dentistId <= 0)
             {
+                if (dentistId == -1)
+                    ViewBag.Error = "Este CPF já foi cadastrado";
+
                 ViewData["Section"] = "Dentistas";
                 ViewData["Action"] = "Criar Novo";
                 return View(Model);

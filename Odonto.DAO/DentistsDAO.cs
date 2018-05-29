@@ -53,6 +53,8 @@ namespace Odonto.DAO
 
                 Person person = Dentist.GetBase();
                 int insertedId = PersonsDAO.Add(person);
+                if (insertedId < 0)
+                    return insertedId;
                 Dentist.ID = insertedId;
             }
             catch (Exception e)
@@ -61,13 +63,14 @@ namespace Odonto.DAO
             }
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var resp = sql.Execute(@"INSERT INTO Dentists (ID,Specialty,CRO)
-                                        VALUES (@ID,@Specialty,@CRO)",
+                var resp = sql.Execute(@"INSERT INTO Dentists (ID,Specialty,CRO,Active)
+                                        VALUES (@ID,@Specialty,@CRO,@Active)",
                                         new
                                         {
                                             ID = Dentist.ID,
                                             Specialty = Dentist.Specialty,
-                                            CRO = Dentist.CRO
+                                            CRO = Dentist.CRO,
+                                            Active = Dentist.Active
                                         });
                 return Dentist.ID;
             }
@@ -82,13 +85,14 @@ namespace Odonto.DAO
             {
                 using (var sql = new NpgsqlConnection(strConnection))
                 {
-                    var resp = sql.Execute(@"UPDATE Dentists SET Specialty = @Specialty,CRO = @CRO
+                    var resp = sql.Execute(@"UPDATE Dentists SET Specialty = @Specialty,CRO = @CRO,Active = @Active
                                             WHERE ID=@ID",
                                             new
                                             {
                                                 ID = Dentist.ID,
                                                 Specialty = Dentist.Specialty,
-                                                CRO = Dentist.CRO
+                                                CRO = Dentist.CRO,
+                                                Active = Dentist.Active
                                             });
                     return Convert.ToBoolean(resp);
                 }

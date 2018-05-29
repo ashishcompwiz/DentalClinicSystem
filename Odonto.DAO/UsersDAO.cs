@@ -14,27 +14,19 @@ namespace Odonto.DAO
             strConnection = strConn;
         }
 
-        public List<User> GetAll()
+        public List<User> GetAll(int clinicId)
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var list = sql.Query<User>("SELECT * FROM Users").AsList();
+                var list = sql.Query<User>(@"SELECT Users.ID, Users.Type, Users.Active, Users.Email, UserType.Name As TypeName 
+                                            FROM Users LEFT JOIN UserType ON Users.Type = UserType.ID
+                                            WHERE EXISTS(SELECT 1 FROM Persons WHERE clinicId = @clinicId)", 
+                                            new { clinicId }).AsList();
                 return list;
             }
         }
 
-        public List<User> GetByPage(int Page, int Size)
-        {
-            int IndexStart = (Page * Size) - Size;
-            int IndexEnd = Page * Size;
-            using (var sql = new NpgsqlConnection(strConnection))
-            {
-                var list = sql.Query<User>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Users) As Users WHERE Users.RowIndex > " + IndexStart + " AND Users.RowIndex <= " + IndexEnd).AsList();
-                return list;
-            }
-        }
-
-        public User GetById(string ID)
+        public User GetById(int ID)
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
@@ -72,8 +64,11 @@ namespace Odonto.DAO
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var resp = sql.Execute(@"UPDATE Users SET Active = @Active, Email = @Email, Password = @Password, Type = @Type
-                                            WHERE ID=@ID",
+                var updateSQL = "UPDATE Users SET Active = @Active, Email = @Email, Type = @Type ";
+                updateSQL += !string.IsNullOrEmpty(User.Password) ? ", Password = @Password " : string.Empty;
+                updateSQL += "WHERE ID = @ID";
+
+                var resp = sql.Execute(updateSQL,
                                         new
                                         {
                                             Active = User.Active,
@@ -100,6 +95,16 @@ namespace Odonto.DAO
             using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<int>("SELECT COUNT(1) FROM Users");
+            }
+        }
+
+        public IEnumerable<UserType> GetTypes()
+        {
+            using (var sql = new NpgsqlConnection(strConnection))
+            {
+                
+                var list = sql.Query<UserType>(@"SELECT * FROM UserType").AsList();
+                return list;
             }
         }
     }

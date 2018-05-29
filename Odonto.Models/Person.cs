@@ -5,10 +5,6 @@ namespace Odonto.Models
 {
     public class Person
     {
-        public Person()
-        {
-        }
-
         public int ID { get; set; }
 
         public int ClinicID { get; set; }

@@ -4,6 +4,10 @@
 }
 <div class="col-md-12">
 	<div class="card card-with-error">
+		@if (!string.IsNullOrEmpty(ViewBag.Error))
+		{
+			<div class="card-header">@ViewBag.Error</div>
+		}
 		<div class="card-body">
 			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
 				<input type="hidden" asp-for="ID" />
@@ -22,14 +26,14 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">CRO</label>
+								<label class="control-label">CRO *</label>
 								<input type="text" asp-for="CRO" class="form-control" autofocus required />
 								<span asp-validation-for="CRO" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group has-info">
-								<label class="control-label">Especialidade</label>
+								<label class="control-label">Especialidade *</label>
 								<input type="text" asp-for="Specialty" class="form-control" autofocus required />
 								<span asp-validation-for="Specialty" class="form-control-feedback text-danger"></span>
 							</div>

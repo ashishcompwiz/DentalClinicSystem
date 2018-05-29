@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Odonto.Models
 {
     public class User
     {
-        public User()
-        {
-        }
-
         public int ID { get; set; }
 
-        public bool Active { get; set; }
+        [Required(ErrorMessage = "Este campo é obrigatório")]
+        public bool Active { get; set; } = true;
 
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string Email { get; set; }
 
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Este campo é obrigatório")]
         public string Type { get; set; }
+
+        public string TypeName { get; set; }
     }
 }

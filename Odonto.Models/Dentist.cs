@@ -10,6 +10,8 @@ namespace Odonto.Models
 
         public string CRO { get; set; }
 
+        public bool Active { get; set; } = true;
+
         public Person GetBase()
         {
             return (Person)this;
