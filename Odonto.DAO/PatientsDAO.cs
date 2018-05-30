@@ -88,27 +88,26 @@ namespace Odonto.DAO
             }
         }
 
-        public bool Edit(Patient Patient)
+        public int Edit(Patient Patient)
         {
             PersonsDAO PersonsDAO = new PersonsDAO(strConnection);
             Patient.UpdatedOn = DateTime.Now;
             Person person = Patient.GetBase();
-            if (PersonsDAO.Edit(person))
-            {
-                using (var sql = new NpgsqlConnection(strConnection))
-                {
-                    var resp = sql.Execute(@"UPDATE Patients SET Profession = @Profession
-                                            WHERE ID=@ID",
-                                            new
-                                            {
-                                                ID = Patient.ID,
-                                                Profession = Patient.Profession,
-                                            });
-                    return Convert.ToBoolean(resp);
-                }
-            }
+            int edited = PersonsDAO.Edit(person);
+            if (edited <= 0)
+                return edited;
 
-            return false;
+            using (var sql = new NpgsqlConnection(strConnection))
+            {
+                var resp = sql.Execute(@"UPDATE Patients SET Profession = @Profession
+                                        WHERE ID=@ID",
+                                        new
+                                        {
+                                            ID = Patient.ID,
+                                            Profession = Patient.Profession,
+                                        });
+                return resp;
+            }
         }
 
         public bool Remove(int ID)

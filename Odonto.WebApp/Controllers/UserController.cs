@@ -30,49 +30,49 @@ namespace Odonto.WebApp.Controllers
             return View(userList);
         }
 
-        [HttpGet]
-        public IActionResult Add()
-        {
-            ViewData["Section"] = "Usuários";
-            ViewData["Action"] = "Criar Novo";
-            ViewBag.Types = UsersDAO.GetTypes();
+        //[HttpGet]
+        //public IActionResult Add()
+        //{
+        //    ViewData["Section"] = "Usuários";
+        //    ViewData["Action"] = "Criar Novo";
+        //    ViewBag.Types = UsersDAO.GetTypes();
 
-            var user = new User();
+        //    var user = new User();
 
-            return View(user);
-        }
+        //    return View(user);
+        //}
 
-        [HttpPost]
-        public IActionResult Add(User Model)
-        {
+        //[HttpPost]
+        //public IActionResult Add(User Model)
+        //{
            
-            if (string.IsNullOrEmpty(Model.Password))
-            {
-                ViewData["Section"] = "Usuários";
-                ViewData["Action"] = "Criar Novo";
-                ViewBag.Types = UsersDAO.GetTypes();
-                ViewBag.Error = "Digite uma senha";
+        //    if (string.IsNullOrEmpty(Model.Password))
+        //    {
+        //        ViewData["Section"] = "Usuários";
+        //        ViewData["Action"] = "Criar Novo";
+        //        ViewBag.Types = UsersDAO.GetTypes();
+        //        ViewBag.Error = "Digite uma senha";
 
-                return View(Model);
-            }
+        //        return View(Model);
+        //    }
 
-            var added = UsersDAO.Add(Model);
-            if (added)
-            {
-                ViewData["Section"] = "Usuários";
-                ViewData["Action"] = "Criar Novo";
-                ViewBag.Types = UsersDAO.GetTypes();
+        //    var added = UsersDAO.Add(Model);
+        //    if (added)
+        //    {
+        //        ViewData["Section"] = "Usuários";
+        //        ViewData["Action"] = "Criar Novo";
+        //        ViewBag.Types = UsersDAO.GetTypes();
 
-                return View(Model);
-            }
+        //        return View(Model);
+        //    }
 
-            return RedirectToAction("List");
-        }
+        //    return RedirectToAction("List");
+        //}
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ViewData["Section"] = "Dentistas";
+            ViewData["Section"] = "Usuários";
             ViewData["Action"] = "Editar";
             ViewBag.Types = UsersDAO.GetTypes();
 

@@ -155,5 +155,9 @@ textarea.form-control {
 }
 
 .form-control:hover, .form-control:focus {
-	border-color: #004488 !important;
+	border-color: #0068d0 !important;
+}
+
+.form-control {
+	border-color: #99abb4;
 }

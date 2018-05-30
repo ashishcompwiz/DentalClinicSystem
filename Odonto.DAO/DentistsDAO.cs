@@ -76,29 +76,29 @@ namespace Odonto.DAO
             }
         }
 
-        public bool Edit(Dentist Dentist)
+        public int Edit(Dentist Dentist)
         {
             PersonsDAO PersonsDAO = new PersonsDAO(strConnection);
             Dentist.UpdatedOn = DateTime.Now;
             Person person = Dentist.GetBase();
-            if (PersonsDAO.Edit(person))
-            {
-                using (var sql = new NpgsqlConnection(strConnection))
-                {
-                    var resp = sql.Execute(@"UPDATE Dentists SET Specialty = @Specialty,CRO = @CRO,Active = @Active
-                                            WHERE ID=@ID",
-                                            new
-                                            {
-                                                ID = Dentist.ID,
-                                                Specialty = Dentist.Specialty,
-                                                CRO = Dentist.CRO,
-                                                Active = Dentist.Active
-                                            });
-                    return Convert.ToBoolean(resp);
-                }
-            }
 
-            return false;
+            int edited = PersonsDAO.Edit(person);
+            if (edited <= 0)
+                return edited;
+
+            using (var sql = new NpgsqlConnection(strConnection))
+            {
+                var resp = sql.Execute(@"UPDATE Dentists SET Specialty = @Specialty,CRO = @CRO,Active = @Active
+                                        WHERE ID=@ID",
+                                        new
+                                        {
+                                            ID = Dentist.ID,
+                                            Specialty = Dentist.Specialty,
+                                            CRO = Dentist.CRO,
+                                            Active = Dentist.Active
+                                        });
+                return resp;
+            }
         }
 
         public bool Remove(string ID)

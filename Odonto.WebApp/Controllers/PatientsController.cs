@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
 using Odonto.WebApp.Helpers.Auth;
-using Odonto.WebApp.Helpers.Utils;
 using System;
 
 namespace Odonto.WebApp.Controllers
@@ -127,7 +126,11 @@ namespace Odonto.WebApp.Controllers
 
             Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
             Model.UpdatedBy = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
-            PatientsDAO.Edit(Model);
+            if (PatientsDAO.Edit(Model) <= 0)
+            {
+                ViewBag.Error = "Este CPF já foi cadastrado";
+                return View(Model);
+            }
 
             return RedirectToAction("Records", new { id = Model.ID});
         }

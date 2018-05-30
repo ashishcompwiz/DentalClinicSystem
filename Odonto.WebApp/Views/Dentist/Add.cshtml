@@ -83,6 +83,7 @@
 
 					<h4 class="m-t-10">Credenciais</h4>
 					<hr>
+					<input type="hidden" asp-for="User.ID" />
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -117,8 +118,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label">Senha</label>
-								<input type="password" asp-for="User.Password" class="form-control" autofocus required />
-								<span asp-validation-for="User.Password" class="form-control-feedback text-danger"></span>
+								<input type="password" asp-for="User.Password" class="form-control" autofocus />
 							</div>
 						</div>
 					</div>

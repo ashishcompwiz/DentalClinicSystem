@@ -83,12 +83,16 @@ namespace Odonto.DAO
             }
         }
 
-        public bool Edit(Person Person)
+        public int Edit(Person Person)
         {
             Person.UpdatedOn = DateTime.Now;
 
             using (var sql = new NpgsqlConnection(strConnection))
             {
+                var repeatedCPF = sql.ExecuteScalar<int>("SELECT 1 FROM Persons WHERE CPF = @CPF AND ID <> @ID;", new { CPF = Person.CPF, ID = Person.ID });
+                if (repeatedCPF != 0)
+                    return -1;
+
                 var resp = sql.Execute(@"UPDATE Persons SET ClinicID = @ClinicID,CPF = @CPF,Name = @Name,Sex = @Sex,CEP = @CEP,Address = @Address,Number = @Number,City = @City,State = @State,Phone = @Phone,Phone2 = @Phone2,BirthDate = @BirthDate,UpdatedOn = @UpdatedOn,UpdatedBy = @UpdatedBy
                                         WHERE ID=@ID",
                                         new
@@ -109,7 +113,7 @@ namespace Odonto.DAO
                                             UpdatedOn = Person.UpdatedOn,
                                             UpdatedBy = Person.UpdatedBy
                                         });
-                return Convert.ToBoolean(resp);
+                return resp;
             }
         }
 

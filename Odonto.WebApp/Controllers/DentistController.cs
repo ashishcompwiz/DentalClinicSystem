@@ -53,31 +53,28 @@ namespace Odonto.WebApp.Controllers
         [HttpPost]
         public IActionResult Add(VMDentistUser ViewModel)
         {
-            ViewModel.Dentist.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
-            ViewData["Section"] = "Dentistas";
-            ViewData["Action"] = "Criar Novo";
-            ViewBag.Types = UsersDAO.GetTypes();
+            string error = string.Empty;
 
-            if (UsersDAO.EmailRepeated(ViewModel.User.Email))
-            {
-                ViewBag.Error = "Este e-mail já está sendo utilizado por outro usuário do sistema";
-                return View(ViewModel);
-            }
+            if (UsersDAO.EmailRepeated(ViewModel.User))
+                error += "Este e-mail já está sendo utilizado por outro usuário do sistema;";
 
             if (string.IsNullOrEmpty(ViewModel.User.Password))
-            {
-                ViewBag.Error = "Informe uma senha de acesso para o  dentista";
-                return View(ViewModel);
-            }
+                error += "Informe uma senha de acesso para o dentista;";
 
+            ViewModel.Dentist.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
             int dentistId = DentistsDAO.Add(ViewModel.Dentist);
-            if (dentistId <= 0)
-            {
-                if (dentistId == -1)
-                    ViewBag.Error = "Este CPF já foi cadastrado";
+            if (dentistId == -1)
+                error += "Este CPF já foi cadastrado;";
 
+            if (!string.IsNullOrEmpty(error))
+            {
+                ViewData["Section"] = "Dentistas";
+                ViewData["Action"] = "Criar Novo";
+                ViewBag.Types = UsersDAO.GetTypes();
+                ViewBag.Error = error;
                 return View(ViewModel);
             }
+
             ViewModel.User.ID = dentistId;
             UsersDAO.Add(ViewModel.User);
 
@@ -93,6 +90,7 @@ namespace Odonto.WebApp.Controllers
             var ViewModel = new VMDentistUser();
             ViewModel.Dentist = DentistsDAO.GetById(id);
             ViewModel.User = UsersDAO.GetById(id);
+            ViewBag.Types = UsersDAO.GetTypes();
 
             return View("Add", ViewModel);
         }
@@ -100,8 +98,23 @@ namespace Odonto.WebApp.Controllers
         [HttpPost]
         public IActionResult Edit(VMDentistUser ViewModel)
         {
+            string error = string.Empty;
+            if (UsersDAO.EmailRepeated(ViewModel.User))
+                error += "Este e-mail já está sendo utilizado por outro usuário do sistema;";
+
             ViewModel.Dentist.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
-            DentistsDAO.Edit(ViewModel.Dentist);
+            if (DentistsDAO.Edit(ViewModel.Dentist) <= 0)
+                error += "Este e-mail já está sendo utilizado por outro usuário do sistema;";
+
+            if (!string.IsNullOrEmpty(error))
+            {
+                ViewData["Section"] = "Dentistas";
+                ViewData["Action"] = "Editar";
+                ViewBag.Types = UsersDAO.GetTypes();
+                ViewBag.Error = error;
+                return View("Add", ViewModel);
+            }
+
             UsersDAO.Edit(ViewModel.User);
 
             return RedirectToAction("Details", new { id = ViewModel.Dentist.ID });

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +26,7 @@ namespace Odonto.WebApp
             // Auth Primitives
             services.AddScoped<IsLoggedAttribute>();
             services.AddScoped<IsNotLoggedAttribute>();
-            services.AddScoped<CheckPermissionAttribute>();
+            services.AddScoped<CheckPermission>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +39,7 @@ namespace Odonto.WebApp
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Shared/Error");
             }
 
             app.UseStaticFiles();

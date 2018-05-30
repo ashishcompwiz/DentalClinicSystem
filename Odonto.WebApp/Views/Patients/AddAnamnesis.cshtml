@@ -25,10 +25,12 @@
 								var index = 0;
 								foreach (var item in ViewBag.Diseases)
 								{
-									<div class="form-group m-b-5">
-										<input class="checkbox" name="diseases" type="checkbox" value="@index-@item.ID" />&nbsp;
-										<label class="control-label">@item.Name</label>&nbsp;&nbsp;
-										<input class="form-control" autofocus name="descriptions" type="text" />
+									<div class="form-group m-b-5 row">
+										<div class="col-md-4">
+											<input class="checkbox" name="diseases" type="checkbox" value="@index-@item.ID" />&nbsp;
+											<label class="control-label">@item.Name</label>&nbsp;&nbsp;
+										</div>
+										<input class="col-md-7 form-control" autofocus name="descriptions" type="text" />
 									</div>
 									index++;
 								}

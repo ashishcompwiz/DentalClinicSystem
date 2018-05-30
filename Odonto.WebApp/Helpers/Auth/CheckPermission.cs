@@ -1,13 +1,23 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace Odonto.WebApp.Helpers.Auth
 {
-    public class CheckPermissionAttribute : Attribute, IActionFilter
+    public class CheckPermission : ActionFilterAttribute
     {
-        public void OnActionExecuting(ActionExecutingContext context)
+        private readonly ILogger logger;
+        private readonly string loggerName;
+
+        public CheckPermission(ILogger logg, string loggName)
+        {
+            this.logger = logg;
+            this.loggerName = loggName;
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
             var userId = context.HttpContext.Session.GetString("userId");
             if (string.IsNullOrEmpty(userId))
@@ -16,7 +26,7 @@ namespace Odonto.WebApp.Helpers.Auth
             }
         }
 
-        public void OnActionExecuted(ActionExecutedContext context)
+        public override void OnActionExecuted(ActionExecutedContext context)
         {
             //To do : after the action executes  
         }

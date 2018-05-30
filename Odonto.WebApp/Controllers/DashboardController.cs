@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
+using Odonto.WebApp.Helpers.Auth;
 
 namespace Odonto.WebApp.Controllers
 {
+    [TypeFilter(typeof(IsLoggedAttribute))]
     public class DashboardController : Controller
     {
         private DentistsDAO DentistsDAO;

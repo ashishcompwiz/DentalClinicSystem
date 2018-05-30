@@ -43,11 +43,11 @@ namespace Odonto.DAO
             }
         }
 
-        public bool EmailRepeated(string email)
+        public bool EmailRepeated(User user)
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var exist = sql.QueryFirstOrDefault<int>("SELECT 1 FROM Users WHERE Email = @email", new { email });
+                var exist = sql.QueryFirstOrDefault<int>("SELECT 1 FROM Users WHERE Email = @Email AND ID <> @ID", new { Email = user.Email, ID = user.ID });
                 return Convert.ToBoolean(exist);
             }
         }
@@ -81,6 +81,7 @@ namespace Odonto.DAO
                 var resp = sql.Execute(updateSQL,
                                         new
                                         {
+                                            ID = User.ID,
                                             Active = User.Active,
                                             Email = User.Email,
                                             Password = User.Password,
