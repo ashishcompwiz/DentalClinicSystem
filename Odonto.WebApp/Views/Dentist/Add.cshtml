@@ -1,4 +1,4 @@
-﻿@model Odonto.Models.Dentist
+﻿@model Odonto.WebApp.ViewModels.VMDentistUser
 @{
 	ViewData["Title"] = ViewData["Action"] + " Dentista";
 }
@@ -10,7 +10,7 @@
 		}
 		<div class="card-body">
 			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
-				<input type="hidden" asp-for="ID" />
+				<input type="hidden" asp-for="Dentist.ID" />
 				<div class="form-body">
 					<h3 class="m-t-5">Informações do Profissional</h3>
 					<hr>
@@ -18,8 +18,8 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Nome *</label>
-								<input type="text" asp-for="Name" class="form-control" autofocus required />
-								<span asp-validation-for="Name" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.Name" class="form-control" autofocus required />
+								<span asp-validation-for="Dentist.Name" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 					</div>
@@ -27,15 +27,15 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label">CRO *</label>
-								<input type="text" asp-for="CRO" class="form-control" autofocus required />
-								<span asp-validation-for="CRO" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.CRO" class="form-control" autofocus required />
+								<span asp-validation-for="Dentist.CRO" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group has-info">
 								<label class="control-label">Especialidade *</label>
-								<input type="text" asp-for="Specialty" class="form-control" autofocus required />
-								<span asp-validation-for="Specialty" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.Specialty" class="form-control" autofocus required />
+								<span asp-validation-for="Dentist.Specialty" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 					</div>
@@ -43,25 +43,25 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">CPF *</label>
-								<input type="text" asp-for="CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" required />
-								<span asp-validation-for="CPF" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" required />
+								<span asp-validation-for="Dentist.CPF" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Data de Nascimento</label>
-								<input type="date" asp-for="BirthDate" class="form-control" autofocus />
-								<span asp-validation-for="BirthDate" class="form-control-feedback text-danger"></span>
+								<input type="date" asp-for="Dentist.BirthDate" class="form-control" autofocus />
+								<span asp-validation-for="Dentist.BirthDate" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Sexo *</label><br />
 								<div class="form-group">
-									<input asp-for="Sex" type="radio" value="F" /> Feminino &nbsp;&nbsp;
-									<input asp-for="Sex" type="radio" value="M" /> Masculino
+									<input asp-for="Dentist.Sex" type="radio" value="F" /> Feminino &nbsp;&nbsp;
+									<input asp-for="Dentist.Sex" type="radio" value="M" /> Masculino
 								</div>
-								<span asp-validation-for="Sex" class="form-control-feedback text-danger"></span>
+								<span asp-validation-for="Dentist.Sex" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 					</div>
@@ -69,14 +69,56 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Telefone *</label>
-								<input type="text" asp-for="Phone" class="form-control" autofocus required />
-								<span asp-validation-for="Phone" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.Phone" class="form-control" autofocus required />
+								<span asp-validation-for="Dentist.Phone" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Telefone 2</label>
-								<input type="text" asp-for="Phone2" class="form-control" autofocus />
+								<input type="text" asp-for="Dentist.Phone2" class="form-control" autofocus />
+							</div>
+						</div>
+					</div>
+
+					<h4 class="m-t-10">Credenciais</h4>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Tipo *</label>
+								<select asp-for="User.Type" class="form-control" required>
+									<option value="">Selecione um tipo de usuário</option>
+									@foreach (var item in ViewBag.Types)
+									{
+										<option value="@item.ID">@item.Name</option> }
+								</select>
+								<span asp-validation-for="User.Type" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Ativo *</label>
+								<div class="form-group">
+									<input asp-for="User.Active" type="radio" value="@true" /> Sim &nbsp;&nbsp;
+									<input asp-for="User.Active" type="radio" value="@false" /> Não
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">E-mail *</label>
+								<input type="text" asp-for="User.Email" class="form-control" autofocus required />
+								<span asp-validation-for="User.Email" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Senha</label>
+								<input type="password" asp-for="User.Password" class="form-control" autofocus required />
+								<span asp-validation-for="User.Password" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 					</div>
@@ -87,15 +129,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Rua/Avenida</label>
-								<input type="text" asp-for="Address" class="form-control" autofocus />
-								<span asp-validation-for="Address" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.Address" class="form-control" autofocus />
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Número</label>
-								<input type="text" asp-for="Number" class="form-control" autofocus />
-								<span asp-validation-for="Number" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.Number" class="form-control" autofocus />
 							</div>
 						</div>
 					</div>
@@ -103,15 +143,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cidade</label>
-								<input type="text" asp-for="City" class="form-control" autofocus />
-								<span asp-validation-for="City" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.City" class="form-control" autofocus />
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Estado</label>
-								<input type="text" asp-for="State" class="form-control" autofocus maxlength="2" />
-								<span asp-validation-for="State" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Dentist.State" class="form-control" autofocus maxlength="2" />
 							</div>
 						</div>
 					</div>

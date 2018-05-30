@@ -1,4 +1,4 @@
-﻿@model Odonto.Models.Dentist
+﻿@model Odonto.WebApp.ViewModels.VMDentistUser
 @{
 	ViewData["Title"] = "Detalhes do Dentista";
 }
@@ -7,27 +7,27 @@
 		<div class="card-body">
 			<div class="show-record">
 				<h2 class="m-t-5">
-					@Model.Name
-					<a asp-action="Edit" asp-route-id="@Model.ID" class="pull-right btn btn-outline-warning"><i class="fa fa-pencil"></i> Editar</a>
+					@Model.Dentist.Name
+					<a asp-action="Edit" asp-route-id="@Model.Dentist.ID" class="pull-right btn btn-outline-warning"><i class="fa fa-pencil"></i> Editar</a>
 				</h2>
 				<hr>
 				<div class="row m-t-20">
 					<div class="col-md-4">
 						<dl>
 							<dt>CPF</dt>
-							<dd>@Model.CPF</dd>
+							<dd>@Model.Dentist.CPF</dd>
 						</dl>
 					</div>
 					<div class="col-md-4">
 						<dl>
 							<dt>Data de Nascimento</dt>
-							<dd>@Model.BirthDate.ToShortDateString()</dd>
+							<dd>@Model.Dentist.BirthDate.ToShortDateString()</dd>
 						</dl>
 					</div>
 					<div class="col-md-4">
 						<dl>
 							<dt>Sexo</dt>
-							<dd>@Model.SexString</dd>
+							<dd>@Model.Dentist.SexString</dd>
 						</dl>
 					</div>
 				</div>
@@ -35,13 +35,13 @@
 					<div class="col-md-4">
 						<dl>
 							<dt>CRO</dt>
-							<dd>@Model.CRO</dd>
+							<dd>@Model.Dentist.CRO</dd>
 						</dl>
 					</div>
 					<div class="col-md-4">
 						<dl>
 							<dt>Especialidade</dt>
-							<dd>@Model.Specialty</dd>
+							<dd>@Model.Dentist.Specialty</dd>
 						</dl>
 					</div>
 				</div>
@@ -49,30 +49,61 @@
 					<div class="col-md-4">
 						<dl>
 							<dt>Telefone</dt>
-							<dd>@Model.Phone</dd>
+							<dd>@Model.Dentist.Phone</dd>
 						</dl>
 					</div>
-					@if (!string.IsNullOrEmpty(Model.Phone2))
+					@if (!string.IsNullOrEmpty(Model.Dentist.Phone2))
 					{
 						<div class="col-md-4">
 							<dl>
 								<dt>Telefone 2</dt>
-								<dd>@Model.Phone2</dd>
+								<dd>@Model.Dentist.Phone2</dd>
 							</dl>
 						</div>
 					}
 				</div>
-				@if (!string.IsNullOrEmpty(Model.Address))
+				@if (!string.IsNullOrEmpty(Model.Dentist.Address))
 				{
 					<div class="row">
 						<div class="col-md-12">
 							<dl>
 								<dt>Endereço</dt>
-								<dd>@Model.AddressString</dd>
+								<dd>@Model.Dentist.AddressString</dd>
 							</dl>
 						</div>
 					</div>
 				}
+			</div>
+		</div>
+	</div>
+
+	<div class="card">
+		<div class="card-body">
+			<div class="show-record">
+				<h2 class="m-t-5">
+					Credenciais
+				</h2>
+				<hr>
+				<div class="row m-t-20">
+					<div class="col-md-4">
+						<dl>
+							<dt>E-mail</dt>
+							<dd>@Model.User.Email</dd>
+						</dl>
+					</div>
+					<div class="col-md-4">
+						<dl>
+							<dt>Ativo</dt>
+							<dd>@Model.User.ActiveLabel</dd>
+						</dl>
+					</div>
+					<div class="col-md-4">
+						<dl>
+							<dt>Tipo</dt>
+							<dd>@Model.User.TypeName</dd>
+						</dl>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

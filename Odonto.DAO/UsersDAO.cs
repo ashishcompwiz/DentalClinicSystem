@@ -30,7 +30,8 @@ namespace Odonto.DAO
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                return sql.QueryFirstOrDefault<User>("SELECT * FROM Users WHERE ID = @ID", new { ID });
+                return sql.QueryFirstOrDefault<User>(@"SELECT Users.ID, Users.Type, Users.Active, Users.Email, UserType.Name As TypeName 
+                                                        FROM Users LEFT JOIN UserType ON Users.Type = UserType.ID WHERE Users.ID = @ID", new { ID });
             }
         }
 
@@ -39,6 +40,15 @@ namespace Odonto.DAO
             using (var sql = new NpgsqlConnection(strConnection))
             {
                 return sql.QueryFirstOrDefault<User>("SELECT * FROM Users WHERE Email = @email", new { email });
+            }
+        }
+
+        public bool EmailRepeated(string email)
+        {
+            using (var sql = new NpgsqlConnection(strConnection))
+            {
+                var exist = sql.QueryFirstOrDefault<int>("SELECT 1 FROM Users WHERE Email = @email", new { email });
+                return Convert.ToBoolean(exist);
             }
         }
 

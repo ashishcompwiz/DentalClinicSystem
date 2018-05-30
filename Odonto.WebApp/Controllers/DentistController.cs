@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
 using Odonto.WebApp.Helpers.Auth;
+using Odonto.WebApp.ViewModels;
 using System;
 
 namespace Odonto.WebApp.Controllers
@@ -12,6 +13,7 @@ namespace Odonto.WebApp.Controllers
     public class DentistController : Controller
     {
         private DentistsDAO DentistsDAO;
+        private UsersDAO UsersDAO;
 
         IConfiguration config;
 
@@ -19,6 +21,7 @@ namespace Odonto.WebApp.Controllers
         {
             config = _config;
             DentistsDAO = new DentistsDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
+            UsersDAO = new UsersDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
         }
 
         [HttpGet]
@@ -37,27 +40,46 @@ namespace Odonto.WebApp.Controllers
         {
             ViewData["Section"] = "Dentistas";
             ViewData["Action"] = "Criar Novo";
+            ViewBag.Types = UsersDAO.GetTypes();
 
-            var dentist = new Dentist();
+            var ViewModel = new VMDentistUser();
+            ViewModel.Dentist = new Dentist();
+            ViewModel.User = new User();
+            ViewModel.User.Type = "DENTIST";
 
-            return View(dentist);
+            return View(ViewModel);
         }
 
         [HttpPost]
-        public IActionResult Add(Dentist Model)
+        public IActionResult Add(VMDentistUser ViewModel)
         {
-            Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
-            int dentistId = DentistsDAO.Add(Model);
+            ViewModel.Dentist.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
+            ViewData["Section"] = "Dentistas";
+            ViewData["Action"] = "Criar Novo";
+            ViewBag.Types = UsersDAO.GetTypes();
 
+            if (UsersDAO.EmailRepeated(ViewModel.User.Email))
+            {
+                ViewBag.Error = "Este e-mail já está sendo utilizado por outro usuário do sistema";
+                return View(ViewModel);
+            }
+
+            if (string.IsNullOrEmpty(ViewModel.User.Password))
+            {
+                ViewBag.Error = "Informe uma senha de acesso para o  dentista";
+                return View(ViewModel);
+            }
+
+            int dentistId = DentistsDAO.Add(ViewModel.Dentist);
             if (dentistId <= 0)
             {
                 if (dentistId == -1)
                     ViewBag.Error = "Este CPF já foi cadastrado";
 
-                ViewData["Section"] = "Dentistas";
-                ViewData["Action"] = "Criar Novo";
-                return View(Model);
+                return View(ViewModel);
             }
+            ViewModel.User.ID = dentistId;
+            UsersDAO.Add(ViewModel.User);
 
             return RedirectToAction("Details", new { id = dentistId });
         }
@@ -68,18 +90,21 @@ namespace Odonto.WebApp.Controllers
             ViewData["Section"] = "Dentistas";
             ViewData["Action"] = "Editar";
 
-            var dentist = DentistsDAO.GetById(id);
+            var ViewModel = new VMDentistUser();
+            ViewModel.Dentist = DentistsDAO.GetById(id);
+            ViewModel.User = UsersDAO.GetById(id);
 
-            return View("Add", dentist);
+            return View("Add", ViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(Dentist Model)
+        public IActionResult Edit(VMDentistUser ViewModel)
         {
-            Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
-            DentistsDAO.Edit(Model);
+            ViewModel.Dentist.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
+            DentistsDAO.Edit(ViewModel.Dentist);
+            UsersDAO.Edit(ViewModel.User);
 
-            return RedirectToAction("Details", new { id = Model.ID });
+            return RedirectToAction("Details", new { id = ViewModel.Dentist.ID });
         }
 
         [HttpGet]
@@ -88,12 +113,14 @@ namespace Odonto.WebApp.Controllers
             ViewData["Section"] = "Dentistas";
             ViewData["Action"] = "Detalhes";
 
-            var dentist = DentistsDAO.GetById(id);
+            var ViewModel = new VMDentistUser();
+            ViewModel.Dentist = DentistsDAO.GetById(id);
+            ViewModel.User = UsersDAO.GetById(id);
 
-            if (dentist == null)
+            if (ViewModel.Dentist == null)
                 return RedirectToAction("Index", "Dashboard");
 
-            return View(dentist);
+            return View(ViewModel);
         }
     }
 }

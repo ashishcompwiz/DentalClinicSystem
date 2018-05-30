@@ -18,5 +18,15 @@ namespace Odonto.Models
         public string Type { get; set; }
 
         public string TypeName { get; set; }
+
+        /* Methods */
+        public string ActiveLabel {
+            get 
+            {
+                if (Active)
+                    return "Sim";
+                return "Não";
+            }
+        }
     }
 }
