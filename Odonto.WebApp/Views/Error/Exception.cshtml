@@ -9,10 +9,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	
+
 	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
 	<title>Erro - Odonto Sistema de Gestão</title>
-	
+
 	<link href="~/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link href="~/css/helper.css" rel="stylesheet">
 	<link href="~/css/style.css" rel="stylesheet">
@@ -25,11 +25,12 @@
 				<h1>Erro 500</h1>
 				<h3 class="text-uppercase">Ocorreu um erro interno do servidor</h3>
 				<p class="text-muted m-t-30 m-b-30">Por favor, contate o seu desevolvedor</p>
-				<a class="btn btn-info btn-rounded waves-effect waves-light m-b-40" asp-controller="Dashboard" asp-action="Index">Ir para o Dashboard</a>
+				<p><a class="btn btn-info btn-rounded waves-effect waves-light m-b-10" asp-controller="Dashboard" asp-action="Index">Ir para o Dashboard</a></p>
+				<p><a class="btn btn-outline-secondary btn-rounded waves-effect waves-light m-b-40" onclick="window.history.back()">Voltar</a></p>
 			</div>
 		</div>
 	</div>
-	
+
 	<script src="js/lib/jquery/jquery.min.js"></script>
 	<script src="js/lib/bootstrap/js/popper.min.js"></script>
 	<script src="js/lib/bootstrap/js/bootstrap.min.js"></script>

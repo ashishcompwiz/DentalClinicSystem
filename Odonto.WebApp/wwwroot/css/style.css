@@ -6716,9 +6716,9 @@ tbody tr td:last-child {
   transform: translateY(-50%);
 }
 .error-body h1 {
-  font-size: 150px;
+  font-size: 100px;
   font-weight: 900;
-  line-height: 210px;
+  line-height: 100px;
   color: #444c67;
 }
 /*
@@ -6929,4 +6929,12 @@ tbody tr td:last-child {
   .retina-logo {
     display: inline-block !important;
   }
+}
+
+
+
+.btn-outline-secondary:hover {
+	color: #fff !important;
+	background-color: #6c757d;
+	border-color: #6c757d;
 }
