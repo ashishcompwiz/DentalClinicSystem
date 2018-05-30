@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Http;
 
-namespace Odonto.WebApp.Helpers.Auth
+namespace Odonto.WebApp.Helpers.Filters
 {
     public class IsNotLoggedAttribute : Attribute, IActionFilter
     {

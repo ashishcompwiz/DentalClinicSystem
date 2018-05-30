@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Odonto.WebApp.Helpers.Auth;
+using Odonto.WebApp.Helpers.Filters;
 
 namespace Odonto.WebApp
 {
@@ -26,7 +26,7 @@ namespace Odonto.WebApp
             // Auth Primitives
             services.AddScoped<IsLoggedAttribute>();
             services.AddScoped<IsNotLoggedAttribute>();
-            services.AddScoped<CheckPermission>();
+            services.AddScoped<CheckAccessAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +39,7 @@ namespace Odonto.WebApp
             }
             else
             {
-                app.UseExceptionHandler("/Shared/Error");
+                app.UseExceptionHandler("/Error/Exception");
             }
 
             app.UseStaticFiles();

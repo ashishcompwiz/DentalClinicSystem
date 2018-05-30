@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
-using Odonto.WebApp.Helpers.Auth;
+using Odonto.WebApp.Helpers.Filters;
 using Odonto.WebApp.ViewModels;
 using System;
 
@@ -35,7 +35,7 @@ namespace Odonto.WebApp.Controllers
             return View(dentistList);
         }
 
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN")]
         public IActionResult Add()
         {
             ViewData["Section"] = "Dentistas";
@@ -50,7 +50,7 @@ namespace Odonto.WebApp.Controllers
             return View(ViewModel);
         }
 
-        [HttpPost]
+        [HttpPost, CheckAccess("ADMIN")]
         public IActionResult Add(VMDentistUser ViewModel)
         {
             string error = string.Empty;
@@ -81,7 +81,7 @@ namespace Odonto.WebApp.Controllers
             return RedirectToAction("Details", new { id = dentistId });
         }
 
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN")]
         public IActionResult Edit(int id)
         {
             ViewData["Section"] = "Dentistas";
@@ -95,7 +95,7 @@ namespace Odonto.WebApp.Controllers
             return View("Add", ViewModel);
         }
 
-        [HttpPost]
+        [HttpPost, CheckAccess("ADMIN")]
         public IActionResult Edit(VMDentistUser ViewModel)
         {
             string error = string.Empty;

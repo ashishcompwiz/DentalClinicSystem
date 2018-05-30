@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
-using Odonto.WebApp.Helpers.Auth;
+using Odonto.WebApp.Helpers.Filters;
 using System;
 
 namespace Odonto.WebApp.Controllers
@@ -97,6 +97,9 @@ namespace Odonto.WebApp.Controllers
                 return View(Model);
             }
 
+            if (HttpContext.Session.GetString("userType") == "DENTIST")
+                return RedirectToAction("AddAnamnesis", new { id });
+
             return RedirectToAction("Records", new { id });
         }
 
@@ -137,7 +140,7 @@ namespace Odonto.WebApp.Controllers
         #endregion
 
         #region Procedure
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN", "DENTIST")]
         public IActionResult AddProcedure(int id)
         {
             var patient = PatientsDAO.GetById(id);
@@ -157,7 +160,7 @@ namespace Odonto.WebApp.Controllers
             return View(procedure);
         }
 
-        [HttpPost]
+        [HttpPost, CheckAccess("ADMIN", "DENTIST")]
         public IActionResult AddProcedure(PatientRecordProcedure Model)
         {
             if (!ModelState.IsValid)
@@ -180,7 +183,7 @@ namespace Odonto.WebApp.Controllers
         #endregion
 
         #region Anamnesis
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN", "DENTIST")]
         public IActionResult AddAnamnesis(int id)
         {
             var patient = PatientsDAO.GetById(id);
@@ -203,7 +206,7 @@ namespace Odonto.WebApp.Controllers
             return View(anamnese);
         }
 
-        [HttpPost]
+        [HttpPost, CheckAccess("ADMIN", "DENTIST")]
         public IActionResult AddAnamnesis(PatientRecord Model, string[] diseases, string[] descriptions)
         {
             ViewBag.Diseases = DiseasesDAO.GetAll(Convert.ToInt32(HttpContext.Session.GetInt32("clinicId")));

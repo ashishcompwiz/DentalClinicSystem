@@ -1,0 +1,40 @@
+﻿@{
+	Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+	<title>Permissão Negada - Odonto Sistema de Gestão</title>
+
+	<link href="~/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="~/css/helper.css" rel="stylesheet">
+	<link href="~/css/style.css" rel="stylesheet">
+</head>
+
+<body class="fix-header fix-sidebar">
+	<div class="error-page" id="wrapper">
+		<div class="error-box">
+			<div class="error-body text-center">
+				<h1>Erro 403</h1>
+				<h3 class="text-uppercase">Seu perfil não possui permissão para acessar este recurso</h3>
+				<a class="btn btn-info btn-rounded waves-effect waves-light m-b-40" asp-controller="Dashboard" asp-action="Index">Ir para o Dashboard</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/lib/jquery/jquery.min.js"></script>
+	<script src="js/lib/bootstrap/js/popper.min.js"></script>
+	<script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/jquery.slimscroll.js"></script>
+	<script src="js/sidebarmenu.js"></script>
+	<script src="js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+	<script src="js/custom.min.js"></script>
+</body>
+</html>

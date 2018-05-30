@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
+using Odonto.WebApp.Helpers.Filters;
 using System;
 
 namespace Odonto.WebApp.Controllers
@@ -19,7 +20,7 @@ namespace Odonto.WebApp.Controllers
             UsersDAO = new UsersDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
         }
 
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN")]
         public IActionResult List()
         {
             ViewData["Section"] = "Usuários";
@@ -69,7 +70,7 @@ namespace Odonto.WebApp.Controllers
         //    return RedirectToAction("List");
         //}
 
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN")]
         public IActionResult Edit(int id)
         {
             ViewData["Section"] = "Usuários";
@@ -81,7 +82,7 @@ namespace Odonto.WebApp.Controllers
             return View("Add", user);
         }
 
-        [HttpPost]
+        [HttpPost, CheckAccess("ADMIN")]
         public IActionResult Edit(User Model)
         {
             UsersDAO.Edit(Model);

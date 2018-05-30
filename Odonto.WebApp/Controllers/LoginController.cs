@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Odonto.DAO;
-using Odonto.WebApp.Helpers.Auth;
+using Odonto.WebApp.Helpers.Filters;
+using System.Reflection;
 
 namespace Odonto.WebApp.Controllers
 {
