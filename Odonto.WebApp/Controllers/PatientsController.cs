@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
 using Odonto.WebApp.Helpers.Filters;
+using Odonto.WebApp.Helpers.Utils;
 using System;
 
 namespace Odonto.WebApp.Controllers
@@ -32,9 +33,6 @@ namespace Odonto.WebApp.Controllers
         [HttpGet]
         public IActionResult Records(int id)
         {
-            ViewData["Section"] = "Pacientes";
-            ViewData["Action"] = "Prontuário Odontológico";
-
             var patient = PatientsDAO.GetById(id);
             if (patient == null)
                 return RedirectToAction("Index", "Dashboard");
@@ -47,6 +45,9 @@ namespace Odonto.WebApp.Controllers
                 patient.Record = patientRecord;
             }
 
+            ViewData["Section"] = "Pacientes";
+            ViewData["Action"] = "Prontuário Odontológico";
+            ViewBag.CanRender = AccessControl.CanRender(new string[] { "ADMIN", "DENTIST" });
             return View(patient);
         }
 

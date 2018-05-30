@@ -5,14 +5,14 @@
 <div class="col-md-12">
 	@Html.Partial("_Profile", Model)
 	
-	@if (Model.Record != null)
+	@if (ViewBag.CanRender && Model.Record != null)
 	{
 		@Html.Partial("_Anamnesis", Model.Record)
 		@Html.Partial("_Procedures", Model.Record.Procedures)
 	}
 </div>
 
-@if (Model.Record == null)
+@if (ViewBag.CanRender && Model.Record == null)
 {
 	<a class="btn btn-primary pull-right hidden-xs-down btn-add-flyout" asp-action="AddAnamnesis" asp-route-id="@Model.ID">
 		<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;Criar Anamnese
