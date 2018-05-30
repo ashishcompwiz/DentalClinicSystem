@@ -34,9 +34,8 @@ namespace Odonto.WebApp
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-                app.UseExceptionHandler("/Error/Exception");
             }
             else
             {

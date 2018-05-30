@@ -38,7 +38,6 @@ namespace Odonto.WebApp.Controllers
                 return RedirectToAction("Index", "Dashboard");
 
             var patientRecord = PatientRecordDAO.GetById(id);
-            var o = patientRecord.Diseases.Count;
             if (patientRecord != null)
             {
                 patientRecord.Diseases = PatientRecordDAO.GetDiseases(id);

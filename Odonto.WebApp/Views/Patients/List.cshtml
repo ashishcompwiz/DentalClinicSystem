@@ -13,7 +13,7 @@
 					<div class="col-10 col-md-3 text-right"><input name="cpf" type="text" class="form-control filter" value="@ViewBag.cpf" /></div>
 					<div class="col-2 col-md-2 text-right"><label class="control-label filter">Nome </label></div>
 					<div class="col-10 col-md-3 text-right"><input name="name" type="text" class="form-control filter" value="@ViewBag.name" /></div>
-					<div class="col-12 col-md-2 text-right"><button class="btn btn-success" type="submit"><i class="fa fa-search"></i> Filtrar</button></div>
+					<div class="col-12 col-md-2 text-right"><button class="btn btn-info" type="submit"><i class="fa fa-search"></i> Filtrar</button></div>
 				</div>
 			</form>
 			<div class="table-responsive m-t-20">
@@ -47,3 +47,10 @@
 		</div>
 	</div>
 </div>
+
+<a class="btn btn-success pull-right hidden-xs-down btn-add-flyout" asp-action="Add">
+	<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Criar Novo
+</a>
+<a class="btn btn-success pull-right hidden-sm-up btn-add-flyout" asp-action="Add">
+	<i class="fa fa-plus" aria-hidden="true"></i>
+</a>

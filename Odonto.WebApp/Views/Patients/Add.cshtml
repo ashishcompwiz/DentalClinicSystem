@@ -31,8 +31,8 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">CPF *</label>
-								<input type="text" asp-for="CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" required />
-								<span asp-validation-for="CPF" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" required onblur="validateCPF(this.value)" />
+								<span id="cpf-validation" asp-validation-for="CPF" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -111,10 +111,24 @@
 					</div>
 				</div>
 				<div class="form-actions text-right">
-					<button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+					<button id="submit" type="submit" class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
 					<button type="button" class="btn btn-outline-inverse" onclick="window.history.back()">Cancelar</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
+<script src="~/js/custom/cpfValidator.js"></script>
+<script>
+	function validateCPF(cpf) {
+		if (!TestaCPF(cpf)) {
+			document.getElementById('cpf-validation').innerText = 'CPF Inválido!';
+			//document.getElementById('submit').disabled = true;
+		}
+		else {
+			document.getElementById('cpf-validation').innerText = '';
+			//document.getElementById('submit').disabled = false;
+		}
+	}
+</script>

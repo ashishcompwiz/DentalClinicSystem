@@ -161,3 +161,7 @@ textarea.form-control {
 .form-control {
 	border-color: #99abb4;
 }
+
+.sidebar-nav ul li a {
+	color: #3d4d54;
+}
