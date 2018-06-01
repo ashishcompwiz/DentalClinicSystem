@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Odonto.Models.Administrator>
+@{
+	ViewData["Title"] = "Listar Colaboradores";
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Colaboradores</h4>
+			<div class="table-responsive m-t-20">
+				<table id="myTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th width="15%" class="text-center hidden-sm-down">Cargo</th>
+							<th width="15%" class="text-center hidden-sm-down">Telefone</th>
+							<th width="10%" class="text-center"></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td><a title="Clique para ver o colaborador" asp-action="Details" asp-route-id="@item.ID">@item.Name</a></td>
+								<td class="text-center hidden-sm-down">@item.Position</td>
+								<td class="text-center hidden-sm-down">@item.Phone</td>
+								<td class="text-center">
+									<a title="Editar" class="text-warning" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-pencil fa-lg"></i></a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a class="btn btn-success pull-right hidden-xs-down btn-add-flyout" asp-action="Add">
+	<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Criar Novo
+</a>
+<a class="btn btn-success pull-right hidden-sm-up btn-add-flyout" asp-action="Add">
+	<i class="fa fa-plus" aria-hidden="true"></i>
+</a>

@@ -97,7 +97,7 @@ namespace Odonto.DAO
                                             CRO = Dentist.CRO,
                                             Active = Dentist.Active
                                         });
-                return resp;
+                return Dentist.ID;
             }
         }
 

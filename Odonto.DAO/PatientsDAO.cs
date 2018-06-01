@@ -106,7 +106,7 @@ namespace Odonto.DAO
                                             ID = Patient.ID,
                                             Profession = Patient.Profession,
                                         });
-                return resp;
+                return Patient.ID;
             }
         }
 

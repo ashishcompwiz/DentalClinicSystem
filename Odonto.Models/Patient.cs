@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Odonto.Models
+﻿namespace Odonto.Models
 {
     public class Patient : Person
     {
         public string Profession { get; set; }
 
         public PatientRecord Record { get; set; }
+
+        public string Email { get; set; }
 
         public Person GetBase()
         {

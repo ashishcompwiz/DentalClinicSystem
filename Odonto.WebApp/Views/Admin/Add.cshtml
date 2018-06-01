@@ -1,6 +1,6 @@
-﻿@model Odonto.WebApp.ViewModels.VMDentistUser
+﻿@model Odonto.WebApp.ViewModels.VMAdminUser
 @{
-	ViewData["Title"] = ViewData["Action"] + " Dentista";
+	ViewData["Title"] = ViewData["Action"] + " Colaborador";
 	var action = this.ViewContext.RouteData.Values["action"].ToString();
 }
 <div class="col-md-12">
@@ -11,86 +11,78 @@
 		}
 		<div class="card-body">
 			<form action="@action" method="post">
-				<input type="hidden" asp-for="Dentist.ID" />
+				<input type="hidden" asp-for="Admin.ID" />
 				<div class="form-body">
-					<h3 class="m-t-5">Informações do Profissional</h3>
+					<h3 class="m-t-5">Informações do Colaborador</h3>
 					<hr>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Nome <small>(campo obrigatório)</small></label>
-								<input type="text" asp-for="Dentist.Name" class="form-control" autofocus required />
-								<span asp-validation-for="Dentist.Name" class="form-control-feedback text-danger"></span>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">CRO <small>(campo obrigatório)</small></label>
-								<input type="text" asp-for="Dentist.CRO" class="form-control" autofocus required />
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group has-info">
-								<label class="control-label">Especialidade <small>(campo obrigatório)</small></label>
-								<input type="text" asp-for="Dentist.Specialty" class="form-control" autofocus required />
-								<span asp-validation-for="Dentist.Specialty" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Admin.Name" class="form-control" autofocus required />
+								<span asp-validation-for="Admin.Name" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">CPF <small>(campo obrigatório)</small></label>
-								<input type="text" asp-for="Dentist.CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" required />
-								<span id="cpf-validation" asp-validation-for="Dentist.CPF" class="form-control-feedback text-danger"></span>
+								<label class="control-label">CPF </label>
+								<input type="text" asp-for="Admin.CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" />
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Data de Nascimento</label>
-								<input type="date" asp-for="Dentist.BirthDate" class="form-control" autofocus />
+								<input type="date" asp-for="Admin.BirthDate" class="form-control" autofocus />
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Sexo <small>(campo obrigatório)</small></label><br />
 								<div class="form-group">
-									<input asp-for="Dentist.Sex" type="radio" value="F" /> Feminino &nbsp;&nbsp;
-									<input asp-for="Dentist.Sex" type="radio" value="M" /> Masculino
+									<input asp-for="Admin.Sex" type="radio" value="F" /> Feminino &nbsp;&nbsp;
+									<input asp-for="Admin.Sex" type="radio" value="M" /> Masculino
 								</div>
-								<span asp-validation-for="Dentist.Sex" class="form-control-feedback text-danger"></span>
+								<span asp-validation-for="Admin.Sex" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
+								<label class="control-label">Cargo </label>
+								<input type="text" asp-for="Admin.Position" class="form-control" autofocus />
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
 								<label class="control-label">Telefone <small>(campo obrigatório)</small></label>
-								<input type="text" asp-for="Dentist.Phone" id="phone1" class="form-control" autofocus required />
-								<span asp-validation-for="Dentist.Phone" class="form-control-feedback text-danger"></span>
+								<input type="text" asp-for="Admin.Phone" id="phone1" class="form-control" autofocus required />
+								<span asp-validation-for="Admin.Phone" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Telefone 2</label>
-								<input type="text" asp-for="Dentist.Phone2" id="phone2" class="form-control" autofocus />
+								<input type="text" asp-for="Admin.Phone2" id="phone2" class="form-control" autofocus />
 							</div>
 						</div>
 					</div>
-
 					<h4 class="m-t-10">Credenciais</h4>
 					<hr>
 					<input type="hidden" asp-for="User.ID" />
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Tipo</label>
-								<div class="form-group">	
-									<input type="hidden" asp-for="User.Type" />
-									<label class="control-label">Dentista</label>
-								</div>
+								<label class="control-label">Tipo <small>(campo obrigatório)</small></label>
+								<select asp-for="User.Type" class="form-control" required>
+									<option value="">Selecione um tipo de usuário</option>
+									@foreach (var item in ViewBag.Types)
+									{
+										<option value="@item.ID">@item.Name</option> }
+								</select>
+								<span asp-validation-for="User.Type" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -133,13 +125,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Rua/Avenida</label>
-								<input type="text" asp-for="Dentist.Address" class="form-control" autofocus />
+								<input type="text" asp-for="Admin.Address" class="form-control" autofocus />
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Número</label>
-								<input type="text" asp-for="Dentist.Number" class="form-control" autofocus />
+								<input type="text" asp-for="Admin.Number" class="form-control" autofocus />
 							</div>
 						</div>
 					</div>
@@ -147,13 +139,13 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cidade</label>
-								<input type="text" asp-for="Dentist.City" class="form-control" autofocus />
+								<input type="text" asp-for="Admin.City" class="form-control" autofocus />
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Estado</label>
-								<input type="text" asp-for="Dentist.State" class="form-control" autofocus maxlength="2" />
+								<input type="text" asp-for="Admin.State" class="form-control" autofocus maxlength="2" />
 							</div>
 						</div>
 					</div>
@@ -167,7 +159,6 @@
 	</div>
 </div>
 
-<script src="~/js/custom/cpfValidator.js"></script>
 <script src="https://unpkg.com/imask"></script>
 <script>
 	var element = document.getElementById('phone1');

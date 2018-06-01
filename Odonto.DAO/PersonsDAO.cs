@@ -113,7 +113,7 @@ namespace Odonto.DAO
                                             UpdatedOn = Person.UpdatedOn,
                                             UpdatedBy = Person.UpdatedBy
                                         });
-                return resp;
+                return Person.ID;
             }
         }
 

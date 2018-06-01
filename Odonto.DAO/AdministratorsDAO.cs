@@ -14,51 +14,63 @@ namespace Odonto.DAO
             strConnection = strConn;
         }
 
-        public List<Administrator> GetAll()
+        public List<Administrator> GetAll(int clinicId)
         {
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var list = sql.Query<Administrator>("SELECT * FROM Administrators ORDER BY ID DESC").AsList();
+                var list = sql.Query<Administrator>("SELECT * FROM Administrators LEFT JOIN Persons ON Administrators.ID = Persons.ID WHERE Persons.ClinicID = @ClinicID ORDER BY Name", new { ClinicID = clinicId }).AsList();
                 return list;
             }
         }
 
-        public List<Administrator> GetByPage(int Page, int Size)
+        public Administrator GetById(int ID)
         {
-            int IndexStart = (Page * Size) - Size;
-            int IndexEnd = Page * Size;
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var list = sql.Query<Administrator>("SELECT * FROM (SELECT Row_Number() OVER(ORDER BY ID) AS RowIndex, * FROM Administrators) As Administrators WHERE Administrators.RowIndex > " + IndexStart + " AND Administrators.RowIndex <= " + IndexEnd).AsList();
-                return list;
+                return sql.QueryFirstOrDefault<Administrator>("SELECT * FROM Administrators LEFT JOIN Persons ON Administrators.ID = Persons.ID WHERE Administrators.ID = @ID", new { ID });
             }
         }
 
-        public Administrator Get(int ID)
+        public int Add(Administrator Administrator)
         {
-            using (var sql = new NpgsqlConnection(strConnection))
+            try
             {
-                return sql.QueryFirstOrDefault<Administrator>("SELECT * FROM Administrators WHERE ID = @ID", new { ID = ID });
-            }
-        }
+                PersonsDAO PersonsDAO = new PersonsDAO(strConnection);
+                Administrator.CreatedOn = DateTime.Now;
+                Administrator.UpdatedOn = DateTime.Now;
 
-        public bool Add(Administrator Administrator)
-        {
+                Person person = Administrator.GetBase();
+                int insertedId = PersonsDAO.Add(person);
+                if (insertedId < 0)
+                    return insertedId;
+                Administrator.ID = insertedId;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
             using (var sql = new NpgsqlConnection(strConnection))
             {
-                var resp = sql.Execute(@"INSERT INTO Administrators (Position)
-                                        VALUES (@Position)",
+                var resp = sql.Execute(@"INSERT INTO Administrators (ID, Position)
+                                        VALUES (@ID, @Position)",
                                         new
                                         {
+                                            ID = Administrator.ID,
                                             Position = Administrator.Position
                                         });
-                return Convert.ToBoolean(resp);
+                return Administrator.ID;
             }
         }
 
-        public bool Edit(Administrator Administrator)
+        public int Edit(Administrator Administrator)
         {
+            PersonsDAO PersonsDAO = new PersonsDAO(strConnection);
             Administrator.UpdatedOn = DateTime.Now;
+            Person person = Administrator.GetBase();
+
+            int edited = PersonsDAO.Edit(person);
+            if (edited <= 0)
+                return edited;
 
             using (var sql = new NpgsqlConnection(strConnection))
             {
@@ -66,9 +78,10 @@ namespace Odonto.DAO
                                             WHERE ID=@ID",
                                         new
                                         {
+                                            ID = Administrator.ID,
                                             Position = Administrator.Position
                                         });
-                return Convert.ToBoolean(resp);
+                return Administrator.ID;
             }
         }
 
