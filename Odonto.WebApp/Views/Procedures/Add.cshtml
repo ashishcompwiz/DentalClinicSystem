@@ -28,7 +28,7 @@
 							<div class="form-group">
 								<label class="control-label">Valor <small>(campo obrigatório)</small></label><br />
 								<div class="form-group">
-									<input type="text" asp-for="Value" class="form-control" autofocus />
+									<input id="value" type="text" asp-for="Value" class="form-control" autofocus />
 								</div>
 							</div>
 						</div>
@@ -58,3 +58,8 @@
 		</div>
 	</div>
 </div>
+
+<script src="~/js/custom/jquery.maskMoney.js"></script>
+<script>
+	$("#value").maskMoney({ allowNegative: false, thousands: '.', decimal: ',', affixesStay: false });
+</script>

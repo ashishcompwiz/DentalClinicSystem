@@ -55,7 +55,7 @@ namespace Odonto.WebApp.Controllers
                 return View(Model);
             }
 
-            return RedirectToAction("List");
+            return RedirectToAction("Details", new { id = Model.ID });
         }
 
         [HttpGet, CheckAccess("ADMIN")]
