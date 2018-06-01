@@ -1,6 +1,7 @@
 ﻿@model Odonto.WebApp.ViewModels.VMDentistUser
 @{
 	ViewData["Title"] = ViewData["Action"] + " Dentista";
+	var action = this.ViewContext.RouteData.Values["action"].ToString();
 }
 <div class="col-md-12">
 	<div class="card card-with-error">
@@ -9,7 +10,7 @@
 			<div class="card-header">@ViewBag.Error</div>
 		}
 		<div class="card-body">
-			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
+			<form action="@action" method="post">
 				<input type="hidden" asp-for="Dentist.ID" />
 				<div class="form-body">
 					<h3 class="m-t-5">Informações do Profissional</h3>
@@ -17,7 +18,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Nome *</label>
+								<label class="control-label">Nome <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Dentist.Name" class="form-control" autofocus required />
 								<span asp-validation-for="Dentist.Name" class="form-control-feedback text-danger"></span>
 							</div>
@@ -26,14 +27,13 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">CRO *</label>
+								<label class="control-label">CRO <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Dentist.CRO" class="form-control" autofocus required />
-								<span asp-validation-for="Dentist.CRO" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group has-info">
-								<label class="control-label">Especialidade *</label>
+								<label class="control-label">Especialidade <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Dentist.Specialty" class="form-control" autofocus required />
 								<span asp-validation-for="Dentist.Specialty" class="form-control-feedback text-danger"></span>
 							</div>
@@ -42,21 +42,20 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">CPF *</label>
+								<label class="control-label">CPF <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Dentist.CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" required />
-								<span asp-validation-for="Dentist.CPF" class="form-control-feedback text-danger"></span>
+								<span id="cpf-validation" asp-validation-for="Dentist.CPF" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Data de Nascimento</label>
 								<input type="date" asp-for="Dentist.BirthDate" class="form-control" autofocus />
-								<span asp-validation-for="Dentist.BirthDate" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Sexo *</label><br />
+								<label class="control-label">Sexo <small>(campo obrigatório)</small></label><br />
 								<div class="form-group">
 									<input asp-for="Dentist.Sex" type="radio" value="F" /> Feminino &nbsp;&nbsp;
 									<input asp-for="Dentist.Sex" type="radio" value="M" /> Masculino
@@ -68,15 +67,15 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Telefone *</label>
-								<input type="text" asp-for="Dentist.Phone" class="form-control" autofocus required />
+								<label class="control-label">Telefone <small>(campo obrigatório)</small></label>
+								<input type="text" asp-for="Dentist.Phone" id="phone1" class="form-control" autofocus required />
 								<span asp-validation-for="Dentist.Phone" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Telefone 2</label>
-								<input type="text" asp-for="Dentist.Phone2" class="form-control" autofocus />
+								<input type="text" asp-for="Dentist.Phone2" id="phone2" class="form-control" autofocus />
 							</div>
 						</div>
 					</div>
@@ -87,19 +86,16 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Tipo *</label>
-								<select asp-for="User.Type" class="form-control" required>
-									<option value="">Selecione um tipo de usuário</option>
-									@foreach (var item in ViewBag.Types)
-									{
-										<option value="@item.ID">@item.Name</option> }
-								</select>
-								<span asp-validation-for="User.Type" class="form-control-feedback text-danger"></span>
+								<label class="control-label">Tipo</label>
+								<div class="form-group">	
+									<input type="hidden" asp-for="User.Type" />
+									<label class="control-label">Dentista</label>
+								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">Ativo *</label>
+								<label class="control-label">Ativo <small>(campo obrigatório)</small></label>
 								<div class="form-group">
 									<input asp-for="User.Active" type="radio" value="@true" /> Sim &nbsp;&nbsp;
 									<input asp-for="User.Active" type="radio" value="@false" /> Não
@@ -110,7 +106,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label class="control-label">E-mail *</label>
+								<label class="control-label">E-mail <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="User.Email" class="form-control" autofocus required />
 								<span asp-validation-for="User.Email" class="form-control-feedback text-danger"></span>
 							</div>
@@ -118,7 +114,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label">Senha</label>
-								<input type="password" asp-for="User.Password" class="form-control" autofocus />
+								<input type="password" asp-for="User.Password" class="form-control" autofocus placeholder="@(action == "Edit" ? "Digite a nova senha" : string.Empty)" />
 							</div>
 						</div>
 					</div>
@@ -162,3 +158,15 @@
 		</div>
 	</div>
 </div>
+
+<script src="~/js/custom/cpfValidator.js"></script>
+<script src="https://unpkg.com/imask"></script>
+<script>
+	var element = document.getElementById('phone1');
+	var element2 = document.getElementById('phone2');
+	var maskOptions = {
+		mask: '(00) 00000-0000'
+	};
+	var mask = new IMask(element, maskOptions);
+	var mask = new IMask(element2, maskOptions);
+</script>

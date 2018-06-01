@@ -1,0 +1,60 @@
+﻿@model Odonto.Models.Procedure
+@{
+	ViewData["Title"] = ViewData["Action"] + " Procedimento";
+}
+<div class="col-md-12">
+	<div class="card card-with-error">
+		@if (!string.IsNullOrEmpty(ViewBag.Error))
+		{
+			<div class="card-header">@ViewBag.Error</div>
+		}
+		<div class="card-body">
+			<form action="" method="post">
+				<input type="hidden" asp-for="ID" />
+				<div class="form-body">
+					<h3 class="m-t-5">Procedimento</h3>
+					<hr>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Nome do Procedimento <small>(campo obrigatório)</small></label>
+								<input type="text" asp-for="Name" class="form-control" autofocus required />
+								<span asp-validation-for="Name" class="form-control-feedback text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Valor <small>(campo obrigatório)</small></label><br />
+								<div class="form-group">
+									<input type="text" asp-for="Value" class="form-control" autofocus />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Descrição</label>
+								<textarea asp-for="Description" rows="3" class="form-control" autofocus></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Observação</label>
+								<textarea asp-for="Observation" rows="3" class="form-control" autofocus></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions text-right">
+					<button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Salvar</button>
+					<button type="button" class="btn btn-outline-inverse" onclick="window.history.back()">Cancelar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -78,6 +78,7 @@ namespace Odonto.DAO
                                             WHERE ID=@ID",
                                         new
                                         {
+                                            ID = Procedure.ID,
                                             ClinicID = Procedure.ClinicID,
                                             Name = Procedure.Name,
                                             Description = Procedure.Description,

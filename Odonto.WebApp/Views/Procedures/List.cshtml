@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Odonto.Models.Procedure>
+@{
+	ViewData["Title"] = "Procedimentos";
+}
+
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Procedimentos</h4>
+			<div class="table-responsive m-t-20">
+				<table id="myTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Procedimento</th>
+							<th width="12%" class="text-center hidden-sm-down">Valor</th>
+							<th width="10%" class="text-center"></th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td><a title="Clique para ver o procedimento" asp-action="Details" asp-route-id="@item.ID">@item.Name</a></td>
+								<td class="text-center hidden-sm-down">@item.Value.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</td>
+								<td class="text-center">
+									<a title="Editar" class="text-warning" asp-action="Edit" asp-route-id="@item.ID"><i class="fa fa-pencil fa-lg"></i></a>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<a class="btn btn-success pull-right hidden-xs-down btn-add-flyout" asp-action="Add">
+	<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Criar Novo
+</a>
+<a class="btn btn-success pull-right hidden-sm-up btn-add-flyout" asp-action="Add">
+	<i class="fa fa-plus" aria-hidden="true"></i>
+</a>

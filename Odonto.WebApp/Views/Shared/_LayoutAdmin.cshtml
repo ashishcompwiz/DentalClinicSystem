@@ -24,15 +24,15 @@
 
 <body class="fix-header fix-sidebar">
 	<!-- Preloader - style you can find in spinners.css -->
-	@*<div class="preloader">
+	<div class="preloader">
 			<svg class="circular" viewBox="25 25 50 50">
 				<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
 			</svg>
-		</div>*@
+		</div>
 	<div class="header">
 		<nav class="navbar top-navbar navbar-expand-md navbar-light" style="top: 0;right: 0;left: 0;z-index: 1030;">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html">
+				<a class="navbar-brand" href="/">
 					<b><img src="~/images/dentalIcon32.png" alt="" class="dark-logo" /></b>
 					<span style="font-size: 18px;">Dental Clinic System</span>
 				</a>
@@ -134,8 +134,10 @@
 							<li><a href="@Url.Action("List", "Dentist")">Listar</a></li>
 						</ul>
 					</li>
-
-
+					@if (HttpContextAccessor.HttpContext.Session.GetString("userType") == "DEV" || HttpContextAccessor.HttpContext.Session.GetString("userType") == "ADMIN")
+					{
+						<li><a href="@Url.Action("List", "Procedures")" aria-expanded="false"><i class="fa fa-tasks"></i><span class="hide-menu">Procedimentos</span></a></li>
+					}
 					@if (HttpContextAccessor.HttpContext.Session.GetString("userType") == "DEV")
 					{
 						<li><a href="@Url.Action("List", "Admin")" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Administradores</span></a></li>
@@ -152,10 +154,13 @@
 				<h3 class="text-primary">@ViewData["Section"]</h3>
 			</div>
 			<div class="col-md-7 align-self-center">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="javascript:void(0)">@ViewData["Section"]</a></li>
-					<li class="breadcrumb-item active">@ViewData["Action"]</li>
-				</ol>
+				@if (!string.IsNullOrEmpty((string)ViewData["Action"]))
+				{
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a asp-action="List">@ViewData["Section"]</a></li>
+						<li class="breadcrumb-item active">@ViewData["Action"]</li>
+					</ol>
+				}
 			</div>
 		</div>
 		<div class="container-fluid">

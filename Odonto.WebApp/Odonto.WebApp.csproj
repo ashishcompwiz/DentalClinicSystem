@@ -18,4 +18,9 @@
     <ProjectReference Include="..\Odonto.Models\Odonto.Models.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Amazon.ElasticBeanstalk.Tools" Version="1.1.3" />
+  </ItemGroup>
 </Project>
+

@@ -8,6 +8,7 @@ using System;
 
 namespace Odonto.WebApp.Controllers
 {
+    [TypeFilter(typeof(IsLoggedAttribute)), CheckAccess("ADMIN")]
     public class UserController : Controller
     {
         private UsersDAO UsersDAO;
@@ -20,7 +21,7 @@ namespace Odonto.WebApp.Controllers
             UsersDAO = new UsersDAO(config.GetSection("DB").GetSection("ConnectionString").Value);
         }
 
-        [HttpGet, CheckAccess("ADMIN")]
+        [HttpGet]
         public IActionResult List()
         {
             ViewData["Section"] = "Usuários";
@@ -31,46 +32,7 @@ namespace Odonto.WebApp.Controllers
             return View(userList);
         }
 
-        //[HttpGet]
-        //public IActionResult Add()
-        //{
-        //    ViewData["Section"] = "Usuários";
-        //    ViewData["Action"] = "Criar Novo";
-        //    ViewBag.Types = UsersDAO.GetTypes();
-
-        //    var user = new User();
-
-        //    return View(user);
-        //}
-
-        //[HttpPost]
-        //public IActionResult Add(User Model)
-        //{
-           
-        //    if (string.IsNullOrEmpty(Model.Password))
-        //    {
-        //        ViewData["Section"] = "Usuários";
-        //        ViewData["Action"] = "Criar Novo";
-        //        ViewBag.Types = UsersDAO.GetTypes();
-        //        ViewBag.Error = "Digite uma senha";
-
-        //        return View(Model);
-        //    }
-
-        //    var added = UsersDAO.Add(Model);
-        //    if (added)
-        //    {
-        //        ViewData["Section"] = "Usuários";
-        //        ViewData["Action"] = "Criar Novo";
-        //        ViewBag.Types = UsersDAO.GetTypes();
-
-        //        return View(Model);
-        //    }
-
-        //    return RedirectToAction("List");
-        //}
-
-        [HttpGet, CheckAccess("ADMIN")]
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             ViewData["Section"] = "Usuários";
@@ -82,26 +44,19 @@ namespace Odonto.WebApp.Controllers
             return View("Add", user);
         }
 
-        [HttpPost, CheckAccess("ADMIN")]
+        [HttpPost]
         public IActionResult Edit(User Model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewData["Section"] = "Usuários";
+                ViewData["Action"] = "Editar";
+                ViewBag.Types = UsersDAO.GetTypes();
+                return View("Add", Model);
+            }
             UsersDAO.Edit(Model);
 
             return RedirectToAction("List");
         }
-
-        //[HttpGet]
-        //public IActionResult Details(int id)
-        //{
-        //    ViewData["Section"] = "Usuários";
-        //    ViewData["Action"] = "Detalhes";
-
-        //    var user = UsersDAO.GetById(id);
-
-        //    if (user == null)
-        //        return RedirectToAction("Index", "Dashboard");
-
-        //    return View(user);
-        //}
     }
 }

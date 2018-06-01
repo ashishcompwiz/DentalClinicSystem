@@ -17,7 +17,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Dentista *</label>
+								<label class="control-label">Dentista <small>(campo obrigatório)</small></label>
 								<select asp-for="DentistID" class="form-control col-md-6" autofocus required>
 									<option value="">Selecione o dentista</option>;
 									@foreach (var item in ViewBag.Dentists)
@@ -30,7 +30,7 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Procedimento *</label>
+								<label class="control-label">Procedimento <small>(campo obrigatório)</small></label>
 								<select class="form-control col-md-6" required asp-for="ProcedureID" autofocus onchange="setProcedureValue(this.value)">
 									<option value="">Selecione um procedimento</option>;
 									@foreach (var item in ViewBag.Procedures)
@@ -49,14 +49,14 @@
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Data *</label>
+								<label class="control-label">Data <small>(campo obrigatório)</small></label>
 								<input class="form-control col-md-3 col-sm-6" autofocus type="date" asp-for="Date" required />
 								<span asp-validation-for="Date" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Valor *</label>
+								<label class="control-label">Valor <small>(campo obrigatório)</small></label>
 								<input class="form-control col-md-3 col-sm-6" autofocus type="text" asp-for="Value" required />
 								<span asp-validation-for="Value" class="form-control-feedback text-danger"></span>
 							</div>

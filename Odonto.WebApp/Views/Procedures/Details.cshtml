@@ -1,0 +1,47 @@
+﻿@model Odonto.Models.Procedure
+@{
+	ViewData["Title"] = "Detalhes do Dentista";
+}
+<div class="col-md-12">
+	<div class="card">
+		<div class="card-body">
+			<div class="show-record">
+				<h2 class="m-t-5">
+					@Model.Name
+					<a asp-action="Edit" asp-route-id="@Model.ID" class="pull-right btn btn-outline-warning"><i class="fa fa-pencil"></i> Editar</a>
+				</h2>
+				<hr>
+				<div class="row m-t-20">
+					<div class="col-md-12">
+						<dl>
+							<dt>Valor</dt>
+							<dd>@Model.Value.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</dd>
+						</dl>
+					</div>
+				</div>
+				@if (!string.IsNullOrEmpty(Model.Description))
+				{
+					<div class="row">
+						<div class="col-md-12">
+							<dl>
+								<dt>Descrição</dt>
+								<dd>@Model.Description</dd>
+							</dl>
+						</div>
+					</div>
+				}
+				@if (!string.IsNullOrEmpty(Model.Observation))
+				{
+					<div class="row">
+						<div class="col-md-12">
+							<dl>
+								<dt>Observação</dt>
+								<dd>@Model.Observation</dd>
+							</dl>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>

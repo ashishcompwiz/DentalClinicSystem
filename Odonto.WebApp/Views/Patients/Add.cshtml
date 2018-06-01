@@ -13,7 +13,7 @@
 			<div class="card-header">@ViewBag.Error</div>
 		}
 		<div class="card-body">
-			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
+			<form action="" method="post">
 				<input type="hidden" asp-for="ID" />
 				<div class="form-body">
 					<h3 class="m-t-5">Informações Pessoais</h3>
@@ -21,7 +21,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label class="control-label">Nome *</label>
+								<label class="control-label">Nome <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Name" class="form-control" autofocus required />
 								<span asp-validation-for="Name" class="form-control-feedback text-danger"></span>
 							</div>
@@ -30,21 +30,21 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">CPF *</label>
+								<label class="control-label">CPF <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="CPF" class="form-control" autofocus maxlength="11" placeholder="somente números" required onblur="validateCPF(this.value)" />
 								<span id="cpf-validation" asp-validation-for="CPF" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Data de Nascimento *</label>
+								<label class="control-label">Data de Nascimento <small>(campo obrigatório)</small></label>
 								<input type="date" asp-for="BirthDate" class="form-control" autofocus required />
 								<span asp-validation-for="BirthDate" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Sexo *</label><br />
+								<label class="control-label">Sexo <small>(campo obrigatório)</small></label><br />
 								<div class="form-group">
 									<input asp-for="Sex" type="radio" value="F" /> Feminino &nbsp;&nbsp;
 									<input asp-for="Sex" type="radio" value="M" /> Masculino
@@ -62,15 +62,15 @@
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Telefone *</label>
-								<input type="text" asp-for="Phone" class="form-control" autofocus required />
+								<label class="control-label">Telefone <small>(campo obrigatório)</small></label>
+								<input type="text" asp-for="Phone" id="phone1" class="form-control" autofocus required />
 								<span asp-validation-for="Phone" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Telefone 2</label>
-								<input type="text" asp-for="Phone2" class="form-control" autofocus />
+								<input type="text" asp-for="Phone2" id="phone2" class="form-control" autofocus />
 							</div>
 						</div>
 					</div>
@@ -80,14 +80,14 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Rua/Avenida *</label>
+								<label>Rua/Avenida <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Address" class="form-control" autofocus required />
 								<span asp-validation-for="Address" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label>Número *</label>
+								<label>Número <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Number" class="form-control" autofocus required />
 								<span asp-validation-for="Number" class="form-control-feedback text-danger"></span>
 							</div>
@@ -96,14 +96,14 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Cidade *</label>
+								<label>Cidade <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="City" class="form-control" autofocus required />
 								<span asp-validation-for="City" class="form-control-feedback text-danger"></span>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group">
-								<label>Estado *</label>
+								<label>Estado <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="State" class="form-control" autofocus maxlength="2" required />
 								<span asp-validation-for="State" class="form-control-feedback text-danger"></span>
 							</div>
@@ -120,15 +120,13 @@
 </div>
 
 <script src="~/js/custom/cpfValidator.js"></script>
+<script src="https://unpkg.com/imask"></script>
 <script>
-	function validateCPF(cpf) {
-		if (!TestaCPF(cpf)) {
-			document.getElementById('cpf-validation').innerText = 'CPF Inválido!';
-			//document.getElementById('submit').disabled = true;
-		}
-		else {
-			document.getElementById('cpf-validation').innerText = '';
-			//document.getElementById('submit').disabled = false;
-		}
-	}
+	var element = document.getElementById('phone1');
+	var element2 = document.getElementById('phone2');
+	var maskOptions = {
+		mask: '(00) 00000-0000'
+	};
+	var mask = new IMask(element, maskOptions);
+	var mask = new IMask(element2, maskOptions);
 </script>

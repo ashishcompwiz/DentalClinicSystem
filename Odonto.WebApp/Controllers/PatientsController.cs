@@ -47,7 +47,7 @@ namespace Odonto.WebApp.Controllers
 
             ViewData["Section"] = "Pacientes";
             ViewData["Action"] = "Prontuário Odontológico";
-            ViewBag.CanRender = AccessControl.CanRender(new string[] { "ADMIN", "DENTIST" });
+            ViewBag.CanRender = AccessControl.CanRender(new string[] { "ADMIN", "DENTIST" }, HttpContext);
             return View(patient);
         }
 
@@ -133,7 +133,7 @@ namespace Odonto.WebApp.Controllers
             if (PatientsDAO.Edit(Model) <= 0)
             {
                 ViewBag.Error = "Este CPF já foi cadastrado";
-                return View(Model);
+                return View("Add", Model);
             }
 
             return RedirectToAction("Records", new { id = Model.ID});

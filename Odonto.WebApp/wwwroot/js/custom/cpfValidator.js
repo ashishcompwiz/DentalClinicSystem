@@ -20,3 +20,12 @@
 }
 //var strCPF = "12345678909";
 //alert(TestaCPF(strCPF));
+
+function validateCPF(cpf) {
+	if (!TestaCPF(cpf)) {
+		document.getElementById('cpf-validation').innerText = 'CPF Inválido!';
+	}
+	else {
+		document.getElementById('cpf-validation').innerText = '';
+	}
+}

@@ -12,7 +12,7 @@
 					<thead>
 						<tr>
 							<th>E-mail</th>
-							<th width="20%" class="text-center">Tipo</th>
+							<th width="20%" class="text-center hidden-sm-down">Tipo</th>
 							<th width="10%" class="text-center"></th>
 						</tr>
 					</thead>
@@ -21,7 +21,7 @@
 						{
 							<tr>
 								<td>@item.Email</td>
-								<td class="text-center">@item.TypeName</td>
+								<td class="text-center hidden-sm-down">@item.TypeName</td>
 								<td class="text-center">
 									<a title="Editar" class="text-warning" asp-action="Edit" asp-controller="User" asp-route-id="@item.ID"><i class="fa fa-pencil fa-lg"></i></a>
 								</td>

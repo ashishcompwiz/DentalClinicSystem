@@ -1,6 +1,7 @@
 ﻿@model Odonto.Models.User
 @{
 	ViewData["Title"] = ViewData["Action"] + " Usuário";
+	var action = this.ViewContext.RouteData.Values["action"].ToString();
 }
 <div class="col-md-12">
 	<div class="card card-with-error">
@@ -13,7 +14,7 @@
 			<div class="card-header">@ViewBag.Error</div>
 		}
 		<div class="card-body">
-			<form action="@this.ViewContext.RouteData.Values["action"].ToString()" method="post">
+			<form action="@action" method="post">
 				<input type="hidden" asp-for="ID" />
 				<div class="form-body">
 					<h3 class="m-t-5">Credenciais do Usuário</h3>
@@ -21,7 +22,7 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<div class="form-group">
-								<label class="control-label">Tipo *</label>
+								<label class="control-label">Tipo <small>(campo obrigatório)</small></label>
 								<select asp-for="Type" class="form-control" required>
 									<option value="">Selecione um tipo de usuário</option>
 									@foreach (var item in ViewBag.Types)
@@ -35,7 +36,7 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<div class="form-group">
-								<label class="control-label">Ativo *</label>
+								<label class="control-label">Ativo <small>(campo obrigatório)</small></label>
 								<div class="form-group">
 									<input asp-for="Active" type="radio" value="@true" /> Sim &nbsp;&nbsp;
 									<input asp-for="Active" type="radio" value="@false" /> Não
@@ -46,7 +47,7 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<div class="form-group">
-								<label class="control-label">E-mail *</label>
+								<label class="control-label">E-mail <small>(campo obrigatório)</small></label>
 								<input type="text" asp-for="Email" class="form-control" autofocus required />
 								<span asp-validation-for="Email" class="form-control-feedback text-danger"></span>
 							</div>
@@ -56,8 +57,15 @@
 						<div class="col-md-6 col-md-offset-3">
 							<div class="form-group">
 								<label class="control-label">Senha</label>
-								<input type="password" asp-for="Password" class="form-control" autofocus required />
-								<span asp-validation-for="Password" class="form-control-feedback text-danger"></span>
+								@if (action == "Add")
+								{
+									<input type="password" asp-for="Password" class="form-control" autofocus required />
+									<span asp-validation-for="Password" class="form-control-feedback text-danger"></span>
+								}
+								else
+								{
+									<input type="password" asp-for="Password" class="form-control" autofocus placeholder="Digite a nova senha" />
+								}
 							</div>
 						</div>
 					</div>

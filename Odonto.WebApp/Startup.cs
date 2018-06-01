@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Odonto.WebApp.Helpers.Filters;
+using System.Globalization;
 
 namespace Odonto.WebApp
 {
@@ -27,6 +30,7 @@ namespace Odonto.WebApp
             services.AddScoped<IsLoggedAttribute>();
             services.AddScoped<IsNotLoggedAttribute>();
             services.AddScoped<CheckAccessAttribute>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +43,8 @@ namespace Odonto.WebApp
             }
             else
             {
-                app.UseExceptionHandler("/Error/Exception");
+                app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Error/Exception");
             }
 
             app.UseStaticFiles();
@@ -50,6 +55,11 @@ namespace Odonto.WebApp
                     name: "default",
                     template: "{controller=Login}/{action=Index}/{id?}");
             });
+
+            var cultureInfo = new CultureInfo("pt-BR");
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
         }
     }
 }
