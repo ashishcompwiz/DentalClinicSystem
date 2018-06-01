@@ -14,11 +14,17 @@
 
 @if (ViewBag.CanRender && Model.Record == null)
 {
+	<a class="btn btn-success pull-right hidden-xs-down" asp-action="AddProcedure" asp-route-id="@Model.ID" style="position:fixed;right:185px;bottom:20px;z-index:1;">
+		<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Novo Procedimento
+	</a>
+	<a class="btn btn-success pull-right hidden-sm-up" asp-action="AddProcedure" asp-route-id="@Model.ID"  style="position:fixed;right:20px;bottom:62px;z-index:1;font-size: 12px;">
+		<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Novo Procedimento
+	</a>
 	<a class="btn btn-primary pull-right hidden-xs-down btn-add-flyout" asp-action="AddAnamnesis" asp-route-id="@Model.ID">
 		<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;Criar Anamnese
 	</a>
-	<a class="btn btn-primary pull-right hidden-sm-up btn-add-flyout" asp-action="AddAnamnesis" asp-route-id="@Model.ID">
-		<i class="fa fa-address-card" aria-hidden="true"></i>
+	<a class="btn btn-primary pull-right hidden-sm-up btn-add-flyout" asp-action="AddAnamnesis" asp-route-id="@Model.ID" style="font-size: 12px;">
+		<i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;&nbsp;Criar Anamnese
 	</a>
 }
 else

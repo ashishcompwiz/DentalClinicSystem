@@ -137,7 +137,7 @@
 					<li><a href="@Url.Action("List", "Procedures")" aria-expanded="false"><i class="fa fa-tasks"></i><span class="hide-menu">Procedimentos</span></a></li>
 					@if (HttpContextAccessor.HttpContext.Session.GetString("userType") == "DEV")
 					{
-						<li><a href="@Url.Action("List", "Admin")" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Administradores</span></a></li>
+						<li><a href="@Url.Action("List", "Admin")" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Colaboradores</span></a></li>
 						<li><a href="@Url.Action("List", "User")" aria-expanded="false"><i class="fa fa-key"></i><span class="hide-menu">Credenciais</span></a></li>
 					}
 				</ul>
