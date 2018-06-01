@@ -8,7 +8,7 @@ using System;
 
 namespace Odonto.WebApp.Controllers
 {
-    [TypeFilter(typeof(IsLoggedAttribute)), CheckAccess("ADMIN")]
+    [TypeFilter(typeof(IsLoggedAttribute))]
     public class ProceduresController : Controller
     {
         private ProceduresDAO ProceduresDAO;
@@ -32,7 +32,7 @@ namespace Odonto.WebApp.Controllers
             return View(procedures);
         }
 
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN")]
         public IActionResult Add()
         {
             ViewData["Section"] = "Procedimentos";
@@ -43,7 +43,7 @@ namespace Odonto.WebApp.Controllers
             return View(procedure);
         }
 
-        [HttpPost]
+        [HttpPost, CheckAccess("ADMIN")]
         public IActionResult Add(Procedure Model)
         {
             Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));
@@ -58,7 +58,7 @@ namespace Odonto.WebApp.Controllers
             return RedirectToAction("List");
         }
 
-        [HttpGet]
+        [HttpGet, CheckAccess("ADMIN")]
         public IActionResult Edit(int id)
         {
             ViewData["Section"] = "Procedimentos";
@@ -69,7 +69,7 @@ namespace Odonto.WebApp.Controllers
             return View("Add", procedure);
         }
 
-        [HttpPost]
+        [HttpPost, CheckAccess("ADMIN")]
         public IActionResult Edit(Procedure Model)
         {
             Model.ClinicID = Convert.ToInt32(HttpContext.Session.GetInt32("clinicId"));

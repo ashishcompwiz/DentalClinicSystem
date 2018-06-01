@@ -134,10 +134,7 @@
 							<li><a href="@Url.Action("List", "Dentist")">Listar</a></li>
 						</ul>
 					</li>
-					@if (HttpContextAccessor.HttpContext.Session.GetString("userType") == "DEV" || HttpContextAccessor.HttpContext.Session.GetString("userType") == "ADMIN")
-					{
-						<li><a href="@Url.Action("List", "Procedures")" aria-expanded="false"><i class="fa fa-tasks"></i><span class="hide-menu">Procedimentos</span></a></li>
-					}
+					<li><a href="@Url.Action("List", "Procedures")" aria-expanded="false"><i class="fa fa-tasks"></i><span class="hide-menu">Procedimentos</span></a></li>
 					@if (HttpContextAccessor.HttpContext.Session.GetString("userType") == "DEV")
 					{
 						<li><a href="@Url.Action("List", "Admin")" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Administradores</span></a></li>
