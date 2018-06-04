@@ -30,7 +30,12 @@ namespace Odonto.WebApp
             services.AddScoped<IsLoggedAttribute>();
             services.AddScoped<IsNotLoggedAttribute>();
             services.AddScoped<CheckAccessAttribute>();
+
+            // To use session in cshtml
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // Enable Node Services
+            services.AddNodeServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

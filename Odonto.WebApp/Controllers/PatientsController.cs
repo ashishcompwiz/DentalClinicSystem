@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.NodeServices;
 using Microsoft.Extensions.Configuration;
 using Odonto.DAO;
 using Odonto.Models;
 using Odonto.WebApp.Helpers.Filters;
 using Odonto.WebApp.Helpers.Utils;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Odonto.WebApp.Controllers
 {
@@ -229,5 +232,19 @@ namespace Odonto.WebApp.Controllers
             return RedirectToAction("Records", new { id = Model.PatientID });
         }
         #endregion
+
+        [HttpGet]
+        public async Task<IActionResult> PDF([FromServices] INodeServices nodeServices)
+        {
+            var result = await nodeServices.InvokeAsync<byte[]>("./pdf");
+
+            HttpContext.Response.ContentType = "application/pdf";
+
+            string filename = @"report.pdf";
+            HttpContext.Response.Headers.Add("x-filename", filename);
+            HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "x-filename");
+            HttpContext.Response.Body.Write(result, 0, result.Length);
+            return new ContentResult();
+        }
     }
 }
