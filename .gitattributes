@@ -1,1 +1,2 @@
- 	static/Odonto.WebApp/Controllers* linguist-vendored
+static/* linguist-vendored
+*.js linguist-vendored=false
